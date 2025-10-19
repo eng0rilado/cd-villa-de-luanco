@@ -1,0 +1,323 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actividades', href: '/actividades' },
+  { label: 'Full Body' }
+];
+
+const schedules = [
+  { day: 'Martes', time: '18:00 - 19:00', location: 'Sala de Funcional', instructor: 'Roberto Sánchez' },
+  { day: 'Jueves', time: '18:00 - 19:00', location: 'Sala de Funcional', instructor: 'Roberto Sánchez' },
+  { day: 'Sábado', time: '10:00 - 11:00', location: 'Sala de Funcional', instructor: 'Roberto Sánchez' }
+];
+
+const requirements = [
+  'Ropa deportiva cómoda',
+  'Botella de agua',
+  'Toalla',
+  'Calzado deportivo',
+  'Actitud positiva'
+];
+
+const benefits = [
+  'Trabaja todo el cuerpo',
+  'Mejora la fuerza funcional',
+  'Quema calorías eficientemente',
+  'Desarrolla la coordinación',
+  'Mejora la flexibilidad'
+];
+---
+
+<MainLayout 
+  title="Full Body - Club Deportivo Villa" 
+  description="Descubre el entrenamiento Full Body en el Club Deportivo Villa. Entrenamiento funcional completo que trabaja todo el cuerpo con ejercicios variados."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="display mb-6">Full Body</h1>
+          <p class="text-xl mb-8 opacity-90">
+            Entrenamiento funcional completo que trabaja todo el cuerpo con ejercicios variados. 
+            Mejora tu fuerza, resistencia y coordinación de manera integral.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <Button href="/club/colabora" variant="secondary" size="large">
+              Inscríbete Ahora
+            </Button>
+            <Button href="/club/contacto" variant="ghost" size="large" className="text-apple-inverse border-apple-inverse hover:bg-apple-inverse hover:text-apple-link">
+              Más Información
+            </Button>
+          </div>
+        </div>
+        <div>
+          <img 
+            src="/images/activities/full-body-hero.jpg" 
+            alt="Entrenamiento Full Body" 
+            class="w-full h-96 object-cover rounded-tile image-shadow"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity Details -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-12">
+          <!-- Description -->
+          <div>
+            <h2 class="h1 mb-6">Sobre el Entrenamiento Full Body</h2>
+            <div class="space-y-4 body-text text-apple-secondary">
+              <p>
+                El entrenamiento Full Body es una modalidad de ejercicio que trabaja todos los grupos musculares 
+                en una sola sesión. Combina ejercicios de fuerza, resistencia, flexibilidad y coordinación, 
+                creando un entrenamiento completo y eficiente que se adapta a todos los niveles de condición física.
+              </p>
+              <p>
+                Cada sesión incluye ejercicios funcionales que imitan movimientos de la vida diaria, 
+                utilizando el propio peso corporal, mancuernas, kettlebells, bandas elásticas y otros 
+                elementos. Los entrenamientos se caracterizan por ser dinámicos, variados y progresivos.
+              </p>
+              <p>
+                Nuestro instructor, Roberto Sánchez, es entrenador personal certificado especializado en 
+                entrenamiento funcional con más de 12 años de experiencia. Sus sesiones se adaptan a 
+                cada participante, garantizando resultados seguros y efectivos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Instructor -->
+          <div class="card">
+            <div class="flex items-start space-x-4">
+              <img 
+                src="/images/instructors/roberto-sanchez.jpg" 
+                alt="Roberto Sánchez - Instructor de Full Body" 
+                class="w-20 h-20 rounded-full object-cover"
+              />
+              <div class="flex-1">
+                <h3 class="h2 text-apple-primary mb-2">Roberto Sánchez</h3>
+                <p class="subtext text-apple-secondary mb-3">Entrenador Personal Certificado</p>
+                <p class="body-text text-apple-secondary">
+                  Entrenador personal certificado especializado en entrenamiento funcional con 12 años de experiencia. 
+                  Especialista en adaptación de ejercicios a diferentes niveles y necesidades.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-8">
+          <!-- Schedule -->
+          <Card title="Horarios" className="h-fit">
+            <div class="space-y-4">
+              {schedules.map((schedule) => (
+                <div class="flex items-center justify-between py-2 border-b border-apple-hairline last:border-b-0">
+                  <div>
+                    <div class="font-medium text-apple-primary">{schedule.day}</div>
+                    <div class="text-sm text-apple-secondary">{schedule.time}</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-sm text-apple-secondary">{schedule.location}</div>
+                    <div class="text-xs text-apple-tertiary">{schedule.instructor}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="pt-4 border-t border-apple-hairline mt-4">
+              <div class="flex items-center justify-between">
+                <span class="text-apple-primary font-medium">Precio:</span>
+                <span class="price text-apple-primary">35€/mes</span>
+              </div>
+            </div>
+          </Card>
+
+          <!-- Requirements -->
+          <Card title="Requisitos" className="h-fit">
+            <ul class="space-y-2">
+              {requirements.map((requirement) => (
+                <li class="flex items-center space-x-2 text-sm">
+                  <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-apple-secondary">{requirement}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          <!-- Benefits -->
+          <Card title="Beneficios" className="h-fit">
+            <ul class="space-y-2">
+              {benefits.map((benefit) => (
+                <li class="flex items-center space-x-2 text-sm">
+                  <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                  <span class="text-apple-secondary">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          <!-- CTA -->
+          <div class="space-y-4">
+            <Button href="/club/colabora" variant="primary" size="large" className="w-full">
+              Inscríbete Ahora
+            </Button>
+            <Button href="/club/contacto" variant="secondary" size="large" className="w-full">
+              Contactar
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipment Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Equipamiento Utilizado</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Conoce el material que utilizamos en nuestros entrenamientos
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Mancuernas</h3>
+          <p class="subtext text-apple-secondary">
+            Pesas libres de diferentes pesos para ejercicios de fuerza
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Kettlebells</h3>
+          <p class="subtext text-apple-secondary">
+            Pesas rusas para ejercicios funcionales y de potencia
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Bandas Elásticas</h3>
+          <p class="subtext text-apple-secondary">
+            Resistencia variable para ejercicios de tonificación
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Colchonetas</h3>
+          <p class="subtext text-apple-secondary">
+            Superficie cómoda para ejercicios en el suelo
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Galería</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Momentos de nuestros entrenamientos Full Body
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/full-body-1.jpg" 
+            alt="Entrenamiento Full Body" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/full-body-2.jpg" 
+            alt="Ejercicios con mancuernas" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/full-body-3.jpg" 
+            alt="Ejercicios funcionales" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/full-body-4.jpg" 
+            alt="Entrenamiento grupal" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Activities -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Otras Actividades</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Descubre otras actividades que también podrían interesarte
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card
+          title="Ciclo Indoor"
+          description="Sesiones de ciclismo indoor con música"
+          imageUrl="/images/activities/ciclo-indoor.jpg"
+          href="/actividades/ciclo-indoor"
+        />
+        <Card
+          title="Pádel"
+          description="Aprende este deporte de raqueta"
+          imageUrl="/images/activities/padel.jpg"
+          href="/actividades/padel"
+        />
+        <Card
+          title="Balonmano"
+          description="Deporte de equipo dinámico"
+          imageUrl="/images/activities/balonmano.jpg"
+          href="/actividades/balonmano"
+        />
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,291 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actividades' }
+];
+
+const activities = [
+  {
+    id: 'balonmano',
+    name: 'Balonmano',
+    description: 'Deporte de equipo dinámico y emocionante. Mejora tu condición física y trabaja en equipo.',
+    imageUrl: '/images/activities/balonmano.jpg',
+    href: '/actividades/balonmano',
+    categories: ['Adultos', 'Juvenil'],
+    schedule: 'Martes y Jueves 19:00-21:00',
+    instructor: 'Carlos Martínez',
+    level: 'Todos los niveles'
+  },
+  {
+    id: 'baloncesto',
+    name: 'Baloncesto',
+    description: 'Desarrolla tu coordinación, velocidad y trabajo en equipo con nuestro programa de baloncesto.',
+    imageUrl: '/images/activities/baloncesto.jpg',
+    href: '/actividades/baloncesto',
+    categories: ['Jóvenes', 'Adultos'],
+    schedule: 'Lunes, Miércoles y Viernes 17:00-19:00',
+    instructor: 'Ana García',
+    level: 'Principiante a Avanzado'
+  },
+  {
+    id: 'ciclo-indoor',
+    name: 'Ciclo Indoor',
+    description: 'Sesiones de ciclismo indoor con música. Quema calorías y mejora tu resistencia cardiovascular.',
+    imageUrl: '/images/activities/ciclo-indoor.jpg',
+    href: '/actividades/ciclo-indoor',
+    categories: ['Adultos'],
+    schedule: 'Lunes, Miércoles y Viernes 19:30-20:30',
+    instructor: 'María López',
+    level: 'Todos los niveles'
+  },
+  {
+    id: 'full-body',
+    name: 'Full Body',
+    description: 'Entrenamiento funcional completo que trabaja todo el cuerpo con ejercicios variados.',
+    imageUrl: '/images/activities/full-body.jpg',
+    href: '/actividades/full-body',
+    categories: ['Adultos'],
+    schedule: 'Martes, Jueves y Sábados',
+    instructor: 'Roberto Sánchez',
+    level: 'Todos los niveles'
+  },
+  {
+    id: 'padel',
+    name: 'Pádel',
+    description: 'Aprende y perfecciona tu técnica en este deporte de raqueta cada vez más popular.',
+    imageUrl: '/images/activities/padel.jpg',
+    href: '/actividades/padel',
+    categories: ['Adultos', 'Jóvenes'],
+    schedule: 'Sábados y Domingos 10:00-11:30',
+    instructor: 'David Fernández',
+    level: 'Iniciación a Competitivo'
+  },
+  {
+    id: 'escuela-deportiva',
+    name: 'Escuela Deportiva',
+    description: 'Programa integral para niños de 6 a 12 años. Desarrollo motor y valores deportivos.',
+    imageUrl: '/images/activities/escuela-deportiva.jpg',
+    href: '/actividades/escuela-deportiva',
+    categories: ['Infantil'],
+    schedule: 'Sábados y Domingos 16:00-17:30',
+    instructor: 'Laura Rodríguez',
+    level: '6-12 años'
+  }
+];
+---
+
+<MainLayout 
+  title="Actividades - Club Deportivo Villa" 
+  description="Descubre todas nuestras actividades deportivas: balonmano, baloncesto, ciclo indoor, full body, pádel y escuela deportiva. Encuentra la actividad perfecta para ti."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Nuestras Actividades
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Descubre una amplia variedad de actividades deportivas diseñadas para todas las edades y niveles. 
+          Encuentra tu pasión deportiva con nosotros.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities Grid -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Actividades Disponibles</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Cada actividad está diseñada para ofrecerte la mejor experiencia deportiva
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {activities.map((activity) => (
+          <Card
+            title={activity.name}
+            description={activity.description}
+            imageUrl={activity.imageUrl}
+            href={activity.href}
+            className="h-full"
+          >
+            <div class="space-y-4">
+              <!-- Categories -->
+              <div class="flex flex-wrap gap-2">
+                {activity.categories.map((category) => (
+                  <span class="chip text-xs">{category}</span>
+                ))}
+              </div>
+
+              <!-- Schedule -->
+              <div class="flex items-center space-x-2 text-sm">
+                <svg class="w-4 h-4 text-apple-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="text-apple-secondary">{activity.schedule}</span>
+              </div>
+
+              <!-- Instructor -->
+              <div class="flex items-center space-x-2 text-sm">
+                <svg class="w-4 h-4 text-apple-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <span class="text-apple-secondary">Instructor: {activity.instructor}</span>
+              </div>
+
+              <!-- Level -->
+              <div class="flex items-center space-x-2 text-sm">
+                <svg class="w-4 h-4 text-apple-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                <span class="text-apple-secondary">Nivel: {activity.level}</span>
+              </div>
+
+              <!-- CTA -->
+              <div class="pt-4 border-t border-apple-hairline">
+                <Button href={activity.href} variant="primary" size="small" className="w-full">
+                  Ver Detalles
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Beneficios de Nuestras Actividades</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Por qué elegir nuestras actividades deportivas
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Instructores Certificados</h3>
+          <p class="subtext text-apple-secondary">
+            Todos nuestros instructores están certificados y tienen amplia experiencia
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Material Incluido</h3>
+          <p class="subtext text-apple-secondary">
+            Todo el material necesario para la práctica está incluido en las actividades
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Grupos Reducidos</h3>
+          <p class="subtext text-apple-secondary">
+            Grupos pequeños para una atención personalizada y mejor aprendizaje
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Horarios Flexibles</h3>
+          <p class="subtext text-apple-secondary">
+            Múltiples horarios disponibles para adaptarse a tu rutina diaria
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="h1 mb-6">¿Cómo Inscribirse?</h2>
+          <div class="space-y-4 body-text text-apple-secondary">
+            <p>
+              Inscribirse en nuestras actividades es muy sencillo. Puedes hacerlo de varias formas:
+            </p>
+            <ul class="space-y-2 ml-4">
+              <li class="flex items-start space-x-2">
+                <span class="text-apple-link font-bold">1.</span>
+                <span>Visita nuestras instalaciones y habla con nuestro personal</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-apple-link font-bold">2.</span>
+                <span>Llámanos al +34 91 123 45 67</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-apple-link font-bold">3.</span>
+                <span>Envíanos un email a info@clubvilladeportivo.com</span>
+              </li>
+            </ul>
+            <p>
+              Una vez inscrito, podrás disfrutar de todas las ventajas de ser socio del club, 
+              incluyendo descuentos en actividades y acceso prioritario a nuevas actividades.
+            </p>
+          </div>
+          <div class="mt-8">
+            <Button href="/club/contacto" variant="primary" size="large">
+              Inscríbete Ahora
+            </Button>
+          </div>
+        </div>
+        <div>
+          <img 
+            src="/images/activities/registration.jpg" 
+            alt="Inscripción en actividades deportivas" 
+            class="w-full h-96 object-cover rounded-tile image-shadow"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4 text-center">
+      <h2 class="h1 mb-6">¿Listo para Empezar?</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto">
+        Elige tu actividad favorita y comienza tu journey deportivo con nosotros. 
+        Tenemos actividades para todos los gustos y niveles.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/club/colabora" variant="primary" size="large">
+          Hazte Socio
+        </Button>
+        <Button href="/club/contacto" variant="secondary" size="large">
+          Contacta con Nosotros
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,73 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  imageUrl?: string;
+  href?: string;
+  gradient?: 'blue' | 'orange' | 'yellow' | 'pink';
+  className?: string;
+}
+
+const { title, subtitle, description, imageUrl, href, gradient, className = '' } = Astro.props;
+
+const getGradientClass = (gradient?: string) => {
+  switch (gradient) {
+    case 'blue': return 'sphere-blue';
+    case 'orange': return 'sphere-orange';
+    case 'yellow': return 'sphere-yellow';
+    case 'pink': return 'sphere-pink';
+    default: return '';
+  }
+};
+
+---
+
+<article class={`hero-tile p-8 relative overflow-hidden ${className}`}>
+  {gradient && (
+    <div class={`absolute top-4 right-4 w-20 h-20 rounded-full ${getGradientClass(gradient)} opacity-80`}></div>
+  )}
+  
+  <div class="relative z-10">
+    {imageUrl && (
+      <div class="mb-6">
+        <img 
+          src={imageUrl} 
+          alt={title} 
+          class="w-full h-64 object-cover rounded-image-thumb"
+          loading="lazy"
+        />
+      </div>
+    )}
+    
+    <div class="space-y-4">
+      {subtitle && (
+        <p class="subtext text-apple-secondary opacity-82">{subtitle}</p>
+      )}
+      
+      <h2 class="h2 text-apple-inverse">{title}</h2>
+      
+      {description && (
+        <p class="body-text text-apple-inverse opacity-92">{description}</p>
+      )}
+    </div>
+    
+    <slot />
+  </div>
+  
+  <div class="tile-glow"></div>
+</article>
+
+<style>
+  /* Hover effects for linked tiles */
+  .group:hover .hero-tile {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hero-hover);
+  }
+  
+  /* Ensure proper text contrast on dark backgrounds */
+  .hero-tile h2,
+  .hero-tile p {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+</style>

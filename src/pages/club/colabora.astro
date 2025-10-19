@@ -1,0 +1,305 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Club', href: '/club' },
+  { label: 'Colabora / Hazte Socio' }
+];
+
+const membershipTypes = [
+  {
+    id: 'individual-adulto',
+    name: 'Individual Adulto',
+    price: 35,
+    duration: 1,
+    benefits: [
+      'Acceso a todas las instalaciones',
+      'Participación en actividades grupales',
+      'Descuentos en eventos del club',
+      'Uso del gimnasio completo',
+      'Acceso a vestuarios y servicios'
+    ],
+    features: ['Gimnasio', 'Pistas deportivas', 'Actividades grupales', 'Vestuarios'],
+    isPopular: false,
+    category: 'individual',
+    description: 'Perfecto para adultos que quieren disfrutar de todas nuestras instalaciones'
+  },
+  {
+    id: 'familiar',
+    name: 'Membresía Familiar',
+    price: 80,
+    duration: 1,
+    benefits: [
+      'Acceso familiar completo (hasta 4 miembros)',
+      'Descuentos especiales en actividades',
+      'Prioridad en inscripciones',
+      'Programas familiares exclusivos',
+      'Acceso a todas las instalaciones'
+    ],
+    features: ['Hasta 4 miembros', 'Todas las instalaciones', 'Actividades familiares', 'Descuentos'],
+    isPopular: true,
+    category: 'family',
+    description: 'La opción más económica para familias que quieren disfrutar del deporte juntos'
+  },
+  {
+    id: 'estudiante',
+    name: 'Estudiante',
+    price: 25,
+    duration: 1,
+    benefits: [
+      'Precio reducido para estudiantes',
+      'Acceso completo a instalaciones',
+      'Programas especiales estudiantiles',
+      'Horarios extendidos',
+      'Descuentos en material deportivo'
+    ],
+    features: ['Gimnasio', 'Pistas', 'Actividades estudiantiles', 'Horarios flexibles'],
+    isPopular: false,
+    category: 'student',
+    description: 'Tarifa especial para estudiantes con carné de estudiante válido'
+  }
+];
+---
+
+<MainLayout 
+  title="Colabora / Hazte Socio - Club Deportivo Villa" 
+  description="Únete a nuestra comunidad deportiva. Descubre nuestros tipos de membresía y beneficios exclusivos para socios del Club Deportivo Villa."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Hazte Socio
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Únete a más de 1000 personas que ya disfrutan de las mejores instalaciones deportivas 
+          y actividades de nuestra ciudad
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Membership Types -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Tipos de Membresía</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Elige el plan que mejor se adapte a tus necesidades y presupuesto
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {membershipTypes.map((membership) => (
+          <Card
+            title={membership.name}
+            description={membership.description}
+            className={`h-full relative ${membership.isPopular ? 'border-2 border-apple-link' : ''}`}
+          >
+            {membership.isPopular && (
+              <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span class="chip bg-apple-link text-apple-white">Más Popular</span>
+              </div>
+            )}
+            
+            <div class="space-y-6">
+              <!-- Price -->
+              <div class="text-center">
+                <div class="text-4xl font-semibold text-apple-primary mb-2">
+                  {membership.price}€
+                </div>
+                <div class="text-apple-secondary">por mes</div>
+              </div>
+
+              <!-- Features -->
+              <div>
+                <h4 class="text-sm font-medium text-apple-primary mb-3">Incluye:</h4>
+                <ul class="space-y-2">
+                  {membership.features.map((feature) => (
+                    <li class="flex items-center space-x-2 text-sm">
+                      <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span class="text-apple-secondary">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Benefits -->
+              <div>
+                <h4 class="text-sm font-medium text-apple-primary mb-3">Beneficios:</h4>
+                <ul class="space-y-2">
+                  {membership.benefits.slice(0, 3).map((benefit) => (
+                    <li class="flex items-center space-x-2 text-sm">
+                      <svg class="w-3 h-3 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span class="text-apple-secondary">{benefit}</span>
+                    </li>
+                  ))}
+                  {membership.benefits.length > 3 && (
+                    <li class="text-sm text-apple-tertiary">
+                      +{membership.benefits.length - 3} beneficios más
+                    </li>
+                  )}
+                </ul>
+              </div>
+
+              <!-- CTA Button -->
+              <div class="pt-4 border-t border-apple-hairline">
+                <Button 
+                  variant={membership.isPopular ? 'primary' : 'secondary'} 
+                  size="large"
+                  className="w-full"
+                >
+                  Elegir Plan
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Beneficios de Ser Socio</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Descubre todas las ventajas de formar parte de nuestra comunidad deportiva
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Instalaciones Premium</h3>
+          <p class="subtext text-apple-secondary">
+            Acceso a todas nuestras instalaciones de primer nivel
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Comunidad Activa</h3>
+          <p class="subtext text-apple-secondary">
+            Únete a más de 1000 socios activos y sus familias
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Precios Especiales</h3>
+          <p class="subtext text-apple-secondary">
+            Descuentos exclusivos en actividades y eventos
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Horarios Flexibles</h3>
+          <p class="subtext text-apple-secondary">
+            Acceso de 6:00 a 23:00 de lunes a domingo
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Proceso de Inscripción</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Hacerse socio es muy fácil. Solo necesitas seguir estos sencillos pasos
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white font-semibold text-xl">1</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Elige tu Plan</h3>
+          <p class="subtext text-apple-secondary">
+            Selecciona el tipo de membresía que mejor se adapte a tus necesidades
+          </p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white font-semibold text-xl">2</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Completa el Formulario</h3>
+          <p class="subtext text-apple-secondary">
+            Rellena tus datos personales y adjunta la documentación necesaria
+          </p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white font-semibold text-xl">3</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Realiza el Pago</h3>
+          <p class="subtext text-apple-secondary">
+            Paga tu cuota mensual de forma segura mediante transferencia o tarjeta
+          </p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white font-semibold text-xl">4</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">¡Disfruta!</h3>
+          <p class="subtext text-apple-secondary">
+            Ya eres socio. Ven a conocernos y disfruta de todas las instalaciones
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4 text-center">
+      <h2 class="h1 mb-6">¿Listo para Empezar?</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto">
+        Únete a nuestra familia deportiva hoy mismo y descubre todo lo que el Club Deportivo Villa 
+        tiene para ofrecerte.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/club/contacto" variant="primary" size="large">
+          Inscríbete Ahora
+        </Button>
+        <Button href="/club/instalaciones" variant="secondary" size="large">
+          Ver Instalaciones
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

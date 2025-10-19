@@ -1,0 +1,142 @@
+---
+export interface Props {
+  id: string;
+  title?: string;
+  size?: 'small' | 'medium' | 'large' | 'full';
+  className?: string;
+}
+
+const { id, title, size = 'medium', className = '' } = Astro.props;
+
+const getSizeClass = (size: string) => {
+  switch (size) {
+    case 'small': return 'max-w-md';
+    case 'large': return 'max-w-4xl';
+    case 'full': return 'max-w-full mx-4';
+    default: return 'max-w-2xl';
+  }
+};
+---
+
+<div 
+  id={id} 
+  class="fixed inset-0 z-50 hidden overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <!-- Backdrop -->
+  <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity" aria-hidden="true"></div>
+
+  <!-- Modal Container -->
+  <div class="flex min-h-full items-center justify-center p-4">
+    <div class={`relative w-full ${getSizeClass(size)} ${className}`}>
+      <!-- Modal Content -->
+      <div class="card relative">
+        <!-- Header -->
+        {title && (
+          <div class="flex items-center justify-between mb-6 pb-4 border-b border-apple-hairline">
+            <h3 class="h2 text-apple-primary" id="modal-title">{title}</h3>
+            <button 
+              class="p-2 text-apple-secondary hover:text-apple-primary transition-colors"
+              aria-label="Cerrar modal"
+              data-modal-close
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        )}
+
+        <!-- Content -->
+        <div class="modal-content">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('{id}');
+    if (!modal) return;
+
+    // Close modal handlers
+    const closeModal = () => {
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    };
+
+    // Close button
+    modal.querySelectorAll('[data-modal-close]').forEach(button => {
+      button.addEventListener('click', closeModal);
+    });
+
+    // Backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target.classList.contains('bg-black')) {
+        closeModal();
+      }
+    });
+
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+
+    // Expose open/close functions globally
+    window.openModal = (modalId) => {
+      if (modalId === '{id}') {
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+    };
+
+    window.closeModal = (modalId) => {
+      if (modalId === '{id}') {
+        closeModal();
+      }
+    };
+  });
+</script>
+
+<style>
+  /* Modal animations */
+  .fixed.inset-0 {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .card.relative {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Prevent body scroll when modal is open */
+  body.overflow-hidden {
+    overflow: hidden;
+  }
+</style>

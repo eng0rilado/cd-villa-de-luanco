@@ -1,0 +1,75 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  imageUrl?: string;
+  href?: string;
+  className?: string;
+}
+
+const { title, description, imageUrl, href, className = '' } = Astro.props;
+
+---
+
+<article class={`card ${className} ${href ? 'group' : ''}`}>
+  {href ? (
+    <a href={href} class="block">
+      {imageUrl && (
+        <div class="mb-4">
+          <img 
+            src={imageUrl} 
+            alt={title || ''} 
+            class="w-full h-48 object-cover rounded-image-thumb image-shadow"
+            loading="lazy"
+          />
+        </div>
+      )}
+      
+      {title && (
+        <h3 class="h3 text-apple-primary mb-2">{title}</h3>
+      )}
+      
+      {description && (
+        <p class="subtext text-apple-secondary mb-4">{description}</p>
+      )}
+      
+      <slot />
+    </a>
+  ) : (
+    <>
+      {imageUrl && (
+        <div class="mb-4">
+          <img 
+            src={imageUrl} 
+            alt={title || ''} 
+            class="w-full h-48 object-cover rounded-image-thumb image-shadow"
+            loading="lazy"
+          />
+        </div>
+      )}
+      
+      {title && (
+        <h3 class="h3 text-apple-primary mb-2">{title}</h3>
+      )}
+      
+      {description && (
+        <p class="subtext text-apple-secondary mb-4">{description}</p>
+      )}
+      
+      <slot />
+    </>
+  )}
+</article>
+
+<style>
+  /* Hover effects for linked cards */
+  .group:hover .card {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  /* Ensure proper spacing for card content */
+  .card > *:last-child {
+    margin-bottom: 0;
+  }
+</style>

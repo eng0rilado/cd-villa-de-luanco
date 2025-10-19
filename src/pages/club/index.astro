@@ -1,0 +1,153 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Club' }
+];
+
+const clubSections = [
+  {
+    title: 'Quiénes Somos',
+    description: 'Conoce nuestra historia, misión y valores que nos han acompañado durante más de 50 años.',
+    imageUrl: '/images/club/history.jpg',
+    href: '/club/quienes-somos',
+    features: ['Historia del club', 'Misión y visión', 'Nuestros valores', 'Logros destacados']
+  },
+  {
+    title: 'Instalaciones',
+    description: 'Descubre nuestras modernas instalaciones deportivas equipadas con la mejor tecnología.',
+    imageUrl: '/images/club/facilities.jpg',
+    href: '/club/instalaciones',
+    features: ['Pista de balonmano', 'Canchas de baloncesto', 'Pistas de pádel', 'Gimnasio completo']
+  },
+  {
+    title: 'Patrocinadores y Colaboradores',
+    description: 'Conoce a las empresas y organizaciones que apoyan nuestro proyecto deportivo.',
+    imageUrl: '/images/club/sponsors.jpg',
+    href: '/club/patrocinadores',
+    features: ['Patrocinadores principales', 'Colaboradores locales', 'Alianzas estratégicas', 'Programas de apoyo']
+  },
+  {
+    title: 'Colabora / Hazte Socio',
+    description: 'Únete a nuestra comunidad deportiva y disfruta de todos los beneficios de ser socio.',
+    imageUrl: '/images/club/membership.jpg',
+    href: '/club/colabora',
+    features: ['Tipos de membresía', 'Beneficios exclusivos', 'Proceso de inscripción', 'Ventajas especiales']
+  },
+  {
+    title: 'Contacto / Ubicación',
+    description: 'Encuéntranos y ponte en contacto con nosotros. Estamos aquí para ayudarte.',
+    imageUrl: '/images/club/contact.jpg',
+    href: '/club/contacto',
+    features: ['Ubicación y horarios', 'Información de contacto', 'Cómo llegar', 'Formulario de contacto']
+  }
+];
+---
+
+<MainLayout 
+  title="Club - Club Deportivo Villa" 
+  description="Conoce el Club Deportivo Villa: nuestra historia, instalaciones, patrocinadores y cómo formar parte de nuestra comunidad deportiva."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Conoce Nuestro Club
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Más de 50 años de historia deportiva, instalaciones de primer nivel y una comunidad 
+          apasionada por el deporte. Descubre todo lo que hace especial al Club Deportivo Villa.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Club Sections -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Explora Nuestro Club</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Cada sección del club está diseñada para ofrecerte la mejor experiencia deportiva
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {clubSections.map((section) => (
+          <Card
+            title={section.title}
+            description={section.description}
+            imageUrl={section.imageUrl}
+            href={section.href}
+          >
+            <div class="space-y-4">
+              <ul class="space-y-2">
+                {section.features.map((feature) => (
+                  <li class="flex items-center space-x-2 text-sm">
+                    <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span class="text-apple-secondary">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="pt-4 border-t border-apple-hairline">
+                <Button href={section.href} variant="primary" size="small" className="w-full">
+                  Descubre más
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Stats -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="space-y-2">
+          <div class="text-4xl font-semibold text-apple-primary">50+</div>
+          <div class="subtext">Años de historia</div>
+        </div>
+        <div class="space-y-2">
+          <div class="text-4xl font-semibold text-apple-primary">1000+</div>
+          <div class="subtext">Socios activos</div>
+        </div>
+        <div class="space-y-2">
+          <div class="text-4xl font-semibold text-apple-primary">15+</div>
+          <div class="subtext">Actividades deportivas</div>
+        </div>
+        <div class="space-y-2">
+          <div class="text-4xl font-semibold text-apple-primary">5</div>
+          <div class="subtext">Instalaciones principales</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4 text-center">
+      <h2 class="h1 mb-6">¿Listo para formar parte de nuestra familia?</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto">
+        Únete a miles de personas que ya disfrutan de las mejores instalaciones deportivas 
+        y actividades de nuestra ciudad.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/club/colabora" variant="primary" size="large">
+          Hazte Socio
+        </Button>
+        <Button href="/club/contacto" variant="secondary" size="large">
+          Contacta con Nosotros
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

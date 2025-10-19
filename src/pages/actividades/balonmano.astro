@@ -1,0 +1,260 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actividades', href: '/actividades' },
+  { label: 'Balonmano' }
+];
+
+const schedules = [
+  { day: 'Martes', time: '19:00 - 21:00', location: 'Pista Principal', instructor: 'Carlos Martínez' },
+  { day: 'Jueves', time: '19:00 - 21:00', location: 'Pista Principal', instructor: 'Carlos Martínez' }
+];
+
+const requirements = [
+  'Certificado médico deportivo',
+  'Seguro deportivo (opcional)',
+  'Ropa deportiva cómoda',
+  'Calzado deportivo adecuado',
+  'Botella de agua'
+];
+
+const benefits = [
+  'Mejora la condición cardiovascular',
+  'Desarrolla la coordinación y agilidad',
+  'Fomenta el trabajo en equipo',
+  'Fortalece la musculatura',
+  'Mejora la concentración y reflejos'
+];
+---
+
+<MainLayout 
+  title="Balonmano - Club Deportivo Villa" 
+  description="Descubre el balonmano en el Club Deportivo Villa. Entrenamientos para adultos de todos los niveles con instructor certificado."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="display mb-6">Balonmano</h1>
+          <p class="text-xl mb-8 opacity-90">
+            Deporte de equipo dinámico y emocionante que combina velocidad, fuerza y estrategia. 
+            Mejora tu condición física mientras disfrutas de un deporte apasionante.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <Button href="/club/colabora" variant="secondary" size="large">
+              Inscríbete Ahora
+            </Button>
+            <Button href="/club/contacto" variant="ghost" size="large" className="text-apple-inverse border-apple-inverse hover:bg-apple-inverse hover:text-apple-link">
+              Más Información
+            </Button>
+          </div>
+        </div>
+        <div>
+          <img 
+            src="/images/activities/balonmano-hero.jpg" 
+            alt="Entrenamiento de balonmano" 
+            class="w-full h-96 object-cover rounded-tile image-shadow"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity Details -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-12">
+          <!-- Description -->
+          <div>
+            <h2 class="h1 mb-6">Sobre el Balonmano</h2>
+            <div class="space-y-4 body-text text-apple-secondary">
+              <p>
+                El balonmano es un deporte de equipo que se juega en una cancha de 40x20 metros con dos porterías. 
+                Es un deporte muy dinámico que combina elementos del fútbol, baloncesto y waterpolo, 
+                creando un juego emocionante y de alta intensidad.
+              </p>
+              <p>
+                En nuestras sesiones de entrenamiento, trabajamos tanto la técnica individual como el juego colectivo. 
+                Aprenderás los fundamentos del pase, tiro, defensa y ataque, mientras mejoras tu condición física 
+                y desarrollas habilidades sociales a través del trabajo en equipo.
+              </p>
+              <p>
+                Nuestro instructor, Carlos Martínez, es ex-jugador profesional con más de 15 años de experiencia 
+                como entrenador. Sus entrenamientos están diseñados para adaptarse a todos los niveles, 
+                desde principiantes hasta jugadores experimentados.
+              </p>
+            </div>
+          </div>
+
+          <!-- Instructor -->
+          <div class="card">
+            <div class="flex items-start space-x-4">
+              <img 
+                src="/images/instructors/carlos-martinez.jpg" 
+                alt="Carlos Martínez - Instructor de Balonmano" 
+                class="w-20 h-20 rounded-full object-cover"
+              />
+              <div class="flex-1">
+                <h3 class="h2 text-apple-primary mb-2">Carlos Martínez</h3>
+                <p class="subtext text-apple-secondary mb-3">Instructor Certificado</p>
+                <p class="body-text text-apple-secondary">
+                  Ex-jugador profesional con 15 años de experiencia como entrenador. 
+                  Especializado en formación técnica y táctica del balonmano moderno.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-8">
+          <!-- Schedule -->
+          <Card title="Horarios" className="h-fit">
+            <div class="space-y-4">
+              {schedules.map((schedule) => (
+                <div class="flex items-center justify-between py-2 border-b border-apple-hairline last:border-b-0">
+                  <div>
+                    <div class="font-medium text-apple-primary">{schedule.day}</div>
+                    <div class="text-sm text-apple-secondary">{schedule.time}</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-sm text-apple-secondary">{schedule.location}</div>
+                    <div class="text-xs text-apple-tertiary">{schedule.instructor}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="pt-4 border-t border-apple-hairline mt-4">
+              <div class="flex items-center justify-between">
+                <span class="text-apple-primary font-medium">Precio:</span>
+                <span class="price text-apple-primary">40€/mes</span>
+              </div>
+            </div>
+          </Card>
+
+          <!-- Requirements -->
+          <Card title="Requisitos" className="h-fit">
+            <ul class="space-y-2">
+              {requirements.map((requirement) => (
+                <li class="flex items-center space-x-2 text-sm">
+                  <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-apple-secondary">{requirement}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          <!-- Benefits -->
+          <Card title="Beneficios" className="h-fit">
+            <ul class="space-y-2">
+              {benefits.map((benefit) => (
+                <li class="flex items-center space-x-2 text-sm">
+                  <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                  <span class="text-apple-secondary">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          <!-- CTA -->
+          <div class="space-y-4">
+            <Button href="/club/colabora" variant="primary" size="large" className="w-full">
+              Inscríbete Ahora
+            </Button>
+            <Button href="/club/contacto" variant="secondary" size="large" className="w-full">
+              Contactar
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Galería</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Momentos de nuestros entrenamientos y partidos
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/balonmano-1.jpg" 
+            alt="Entrenamiento de balonmano" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/balonmano-2.jpg" 
+            alt="Partido de balonmano" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/balonmano-3.jpg" 
+            alt="Equipo de balonmano" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/balonmano-4.jpg" 
+            alt="Entrenamiento técnico" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Activities -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Otras Actividades</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Descubre otras actividades que también podrían interesarte
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card
+          title="Baloncesto"
+          description="Desarrolla tu coordinación y trabajo en equipo"
+          imageUrl="/images/activities/baloncesto.jpg"
+          href="/actividades/baloncesto"
+        />
+        <Card
+          title="Full Body"
+          description="Entrenamiento funcional completo"
+          imageUrl="/images/activities/full-body.jpg"
+          href="/actividades/full-body"
+        />
+        <Card
+          title="Pádel"
+          description="Aprende este deporte de raqueta tan popular"
+          imageUrl="/images/activities/padel.jpg"
+          href="/actividades/padel"
+        />
+      </div>
+    </div>
+  </section>
+</MainLayout>

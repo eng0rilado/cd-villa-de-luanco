@@ -1,0 +1,381 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Card from '../components/ui/Card.astro';
+import HeroTile from '../components/ui/HeroTile.astro';
+import Button from '../components/ui/Button.astro';
+
+// Import API functions (in a real app, these would be async calls)
+import { getFeaturedEvents, getFeaturedNews, getActivities } from '../lib/api/api.js';
+
+// For now, we'll use static data - in a real app these would be awaited
+const featuredEvents = [
+  {
+    id: 'torneo-balonmano-2024',
+    title: 'Torneo de Balonmano Villa 2024',
+    description: 'Torneo anual de balonmano con equipos de toda la región. Dos días de competición intensa.',
+    startDate: '2024-03-15',
+    endDate: '2024-03-16',
+    location: 'Club Deportivo Villa',
+    price: 25,
+    imageUrl: '/images/events/torneo-balonmano-2024.jpg',
+    href: '/eventos/fin-semana'
+  },
+  {
+    id: 'campamento-verano-2024',
+    title: 'Campamento de Verano 2024',
+    description: 'Campamento deportivo de verano para niños y jóvenes. Actividades variadas y diversión garantizada.',
+    startDate: '2024-07-01',
+    endDate: '2024-07-15',
+    location: 'Club Deportivo Villa',
+    price: 300,
+    imageUrl: '/images/events/campamento-verano-2024.jpg',
+    href: '/eventos/campamentos'
+  }
+];
+
+const featuredNews = [
+  {
+    id: 'nueva-pista-padel',
+    title: 'Inauguración de la Nueva Pista de Pádel Cubierta',
+    excerpt: 'El Club Deportivo Villa estrena su segunda pista de pádel cubierta con tecnología de última generación.',
+    imageUrl: '/images/news/nueva-pista-padel.jpg',
+    publishedAt: '2024-01-15',
+    href: '/actualidad/noticias'
+  },
+  {
+    id: 'campeonato-balonmano',
+    title: 'Nuestro Equipo de Balonmano Campeón Regional',
+    excerpt: 'El equipo juvenil de balonmano se proclama campeón de la liga regional tras una temporada espectacular.',
+    imageUrl: '/images/news/campeonato-balonmano.jpg',
+    publishedAt: '2024-01-10',
+    href: '/actualidad/noticias'
+  }
+];
+
+const featuredActivities = [
+  {
+    id: 'balonmano-adultos',
+    title: 'Balonmano Adultos',
+    description: 'Entrenamientos de balonmano para adultos de todos los niveles. Mejora tu técnica y condición física.',
+    instructor: 'Carlos Martínez',
+    schedule: 'Martes y Jueves 19:00-21:00',
+    price: 40,
+    imageUrl: '/images/activities/balonmano-adultos.jpg',
+    href: '/actividades/balonmano'
+  },
+  {
+    id: 'padel-iniciacion',
+    title: 'Pádel Iniciación',
+    description: 'Clases de pádel para principiantes. Aprende las bases del juego de forma divertida.',
+    instructor: 'David Fernández',
+    schedule: 'Sábados y Domingos 10:00-11:30',
+    price: 45,
+    imageUrl: '/images/activities/padel-iniciacion.jpg',
+    href: '/actividades/padel'
+  },
+  {
+    id: 'ciclo-indoor',
+    title: 'Ciclo Indoor',
+    description: 'Sesiones de ciclismo indoor con música. Quema calorías y mejora tu resistencia cardiovascular.',
+    instructor: 'María López',
+    schedule: 'Lunes, Miércoles y Viernes 19:30-20:30',
+    price: 30,
+    imageUrl: '/images/activities/ciclo-indoor.jpg',
+    href: '/actividades/ciclo-indoor'
+  }
+];
+---
+
+<MainLayout title="Club Deportivo Villa - Inicio" description="Más de 50 años promoviendo el deporte y la vida sana en nuestra comunidad. Descubre nuestras actividades, instalaciones y únete a nuestra familia deportiva.">
+  <!-- Hero Section -->
+  <section class="background-image-hero relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse flex items-center overflow-x-hidden">
+    <div class="max-width-content mx-auto px-4 w-full max-w-full">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6 animate-fade-in-up" data-animation-delay="0.2s">
+          Club Deportivo Villa
+        </h1>
+        <p class="text-xl mb-8 opacity-90 animate-fade-in-up" data-animation-delay="0.4s">
+          Más de 50 años promoviendo el deporte y la vida sana en nuestra comunidad. 
+          Únete a nuestra familia deportiva y descubre todo lo que tenemos para ofrecerte.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" data-animation-delay="0.6s">
+          <Button href="/club/colabora" variant="secondary" size="large">
+            Hazte Socio
+          </Button>
+          <Button href="/actividades" variant="secondary" size="large">
+            Ver Actividades
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Activities Section -->
+  <section class="py-16 bg-apple-white overflow-x-hidden">
+    <div class="max-width-content mx-auto px-4 w-full max-w-full">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4 animate-fade-in-up" data-animation-delay="0.1s">Actividades Destacadas</h2>
+        <p class="subtext max-w-2xl mx-auto animate-fade-in-up" data-animation-delay="0.2s">
+          Descubre nuestras actividades más populares y encuentra la que mejor se adapte a ti
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        {featuredActivities.map((activity, index) => (
+          <div class="animate-slide-in-up" data-animation-delay={`${0.3 + (index * 0.1)}s`}>
+            <Card
+              key={activity.id}
+              title={activity.title}
+              description={activity.description}
+              imageUrl={activity.imageUrl}
+              href={activity.href}
+            >
+              <div class="space-y-3">
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-apple-secondary">Instructor:</span>
+                  <span class="text-apple-primary font-medium">{activity.instructor}</span>
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-apple-secondary">Horario:</span>
+                  <span class="text-apple-primary">{activity.schedule}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="price text-apple-primary">{activity.price}€/mes</span>
+                  <Button href={activity.href} variant="ghost" size="small">
+                    Más info
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center mt-12 animate-fade-in-up" data-animation-delay="0.6s">
+        <Button href="/actividades" variant="primary" size="large">
+          Ver Todas las Actividades
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Strip - Events -->
+  <section class="section-strip py-16 overflow-x-hidden">
+    <div class="max-width-content mx-auto px-4 w-full max-w-full">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4 animate-fade-in-up" data-animation-delay="0.1s">Próximos Eventos</h2>
+        <p class="subtext max-w-2xl mx-auto animate-fade-in-up" data-animation-delay="0.2s">
+          No te pierdas nuestros eventos especiales y competiciones
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {featuredEvents.map((event, index) => (
+          <div class="animate-slide-in-left" data-animation-delay={`${0.3 + (index * 0.2)}s`}>
+            <HeroTile
+              title={event.title}
+              description={event.description}
+              imageUrl={event.imageUrl}
+              href={event.href}
+              gradient={event.id.includes('balonmano') ? 'blue' : 'orange'}
+            >
+              <div class="flex items-center justify-between mt-6 pt-4 border-t border-apple-tile-border">
+                <div class="flex items-center space-x-4 text-sm">
+                  <div class="flex items-center space-x-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>{new Date(event.startDate).toLocaleDateString('es-ES')}</span>
+                  </div>
+                  <div class="flex items-center space-x-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span>{event.location}</span>
+                  </div>
+                </div>
+                <span class="price text-apple-inverse">{event.price}€</span>
+              </div>
+            </HeroTile>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center mt-12 animate-fade-in-up" data-animation-delay="0.7s">
+        <Button href="/eventos" variant="primary" size="large">
+          Ver Todos los Eventos
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section class="py-16 bg-apple-white overflow-x-hidden">
+    <div class="max-width-content mx-auto px-4 w-full max-w-full">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4 animate-fade-in-up" data-animation-delay="0.1s">Últimas Noticias</h2>
+        <p class="subtext max-w-2xl mx-auto animate-fade-in-up" data-animation-delay="0.2s">
+          Mantente al día con las últimas novedades del club
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {featuredNews.map((news, index) => (
+          <div class="animate-slide-in-right" data-animation-delay={`${0.3 + (index * 0.2)}s`}>
+            <Card
+              title={news.title}
+              description={news.excerpt}
+              imageUrl={news.imageUrl}
+              href={news.href}
+            >
+              <div class="flex items-center justify-between mt-4 pt-4 border-t border-apple-hairline">
+                <span class="caption text-apple-tertiary">
+                  {new Date(news.publishedAt).toLocaleDateString('es-ES')}
+                </span>
+                <Button href={news.href} variant="ghost" size="small">
+                  Leer más
+                </Button>
+              </div>
+            </Card>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center mt-12 animate-fade-in-up" data-animation-delay="0.7s">
+        <Button href="/actualidad/noticias" variant="primary" size="large">
+          Ver Todas las Noticias
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-strip py-16 overflow-x-hidden">
+    <div class="max-width-content mx-auto px-4 text-center w-full max-w-full">
+      <h2 class="h1 mb-6 animate-fade-in-up" data-animation-delay="0.1s">¿Listo para empezar?</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto animate-fade-in-up" data-animation-delay="0.2s">
+        Únete a nuestra comunidad deportiva y descubre todo lo que el Club Deportivo Villa tiene para ofrecerte. 
+        Tenemos actividades para todas las edades y niveles.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" data-animation-delay="0.3s">
+        <Button href="/club/colabora" variant="primary" size="large">
+          Hazte Socio Ahora
+        </Button>
+        <Button href="/club/contacto" variant="secondary" size="large">
+          Contacta con Nosotros
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Animation Classes */
+  .animate-fade-in-up,
+  .animate-slide-in-up,
+  .animate-slide-in-left,
+  .animate-slide-in-right {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .animate-slide-in-up {
+    transform: translateY(50px);
+  }
+
+  .animate-slide-in-left {
+    transform: translateX(-50px);
+  }
+
+  .animate-slide-in-right {
+    transform: translateX(50px);
+  }
+
+  /* Animation States */
+  .animate-fade-in-up.animate,
+  .animate-slide-in-up.animate,
+  .animate-slide-in-left.animate,
+  .animate-slide-in-right.animate {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  /* Staggered animations */
+  .animate-fade-in-up[data-animation-delay],
+  .animate-slide-in-up[data-animation-delay],
+  .animate-slide-in-left[data-animation-delay],
+  .animate-slide-in-right[data-animation-delay] {
+    transition-delay: 0s;
+  }
+
+  .animate-fade-in-up.animate[data-animation-delay],
+  .animate-slide-in-up.animate[data-animation-delay],
+  .animate-slide-in-left.animate[data-animation-delay],
+  .animate-slide-in-right.animate[data-animation-delay] {
+    transition-delay: var(--animation-delay);
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-slide-in-up,
+    .animate-slide-in-left,
+    .animate-slide-in-right {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          const delay = element.getAttribute('data-animation-delay');
+          
+          if (delay) {
+            element.style.setProperty('--animation-delay', delay);
+          }
+          
+          element.classList.add('animate');
+          
+          // Unobserve after animation to prevent re-triggering
+          observer.unobserve(element);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll(
+      '.animate-fade-in-up, .animate-slide-in-up, .animate-slide-in-left, .animate-slide-in-right'
+    );
+
+    animatedElements.forEach(element => {
+      observer.observe(element);
+    });
+
+    // Special handling for hero section - animate immediately
+    const heroElements = document.querySelectorAll('.background-image-hero .animate-fade-in-up');
+    heroElements.forEach((element, index) => {
+      const delay = element.getAttribute('data-animation-delay');
+      if (delay) {
+        setTimeout(() => {
+          element.classList.add('animate');
+        }, parseFloat(delay) * 1000);
+      } else {
+        element.classList.add('animate');
+      }
+    });
+  });
+</script>

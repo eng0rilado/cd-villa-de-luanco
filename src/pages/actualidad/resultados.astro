@@ -1,0 +1,291 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actualidad', href: '/actualidad' },
+  { label: 'Resultados y Clasificaciones' }
+];
+
+const recentMatches = [
+  {
+    id: 'match-1',
+    homeTeam: 'Club Deportivo Villa',
+    awayTeam: 'Atlético Madrid',
+    homeScore: 28,
+    awayScore: 24,
+    date: '2024-02-15',
+    competition: 'Liga Regional Juvenil',
+    isHomeGame: true,
+    status: 'finished'
+  },
+  {
+    id: 'match-2',
+    homeTeam: 'Real Madrid',
+    awayTeam: 'Club Deportivo Villa',
+    homeScore: 31,
+    awayScore: 29,
+    date: '2024-02-08',
+    competition: 'Liga Regional Juvenil',
+    isHomeGame: false,
+    status: 'finished'
+  },
+  {
+    id: 'match-3',
+    homeTeam: 'Club Deportivo Villa',
+    awayTeam: 'Getafe CF',
+    homeScore: null,
+    awayScore: null,
+    date: '2024-02-22',
+    competition: 'Liga Regional Juvenil',
+    isHomeGame: true,
+    status: 'scheduled'
+  }
+];
+
+const classifications = [
+  {
+    position: 1,
+    team: 'Club Deportivo Villa',
+    gamesPlayed: 10,
+    wins: 8,
+    draws: 1,
+    losses: 1,
+    goalsFor: 280,
+    goalsAgainst: 240,
+    points: 17
+  },
+  {
+    position: 2,
+    team: 'Real Madrid',
+    gamesPlayed: 10,
+    wins: 7,
+    draws: 2,
+    losses: 1,
+    goalsFor: 265,
+    goalsAgainst: 235,
+    points: 16
+  },
+  {
+    position: 3,
+    team: 'Atlético Madrid',
+    gamesPlayed: 10,
+    wins: 6,
+    draws: 3,
+    losses: 1,
+    goalsFor: 250,
+    goalsAgainst: 220,
+    points: 15
+  }
+];
+---
+
+<MainLayout 
+  title="Resultados y Clasificaciones - Club Deportivo Villa" 
+  description="Consulta los resultados de nuestros equipos y las clasificaciones de las competiciones del Club Deportivo Villa."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Resultados y Clasificaciones
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Mantente al día con los resultados de nuestros equipos y las clasificaciones de las competiciones
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Matches -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Últimos Partidos</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Resultados de nuestros equipos en las últimas competiciones
+        </p>
+      </div>
+      
+      <div class="space-y-6">
+        {recentMatches.map((match) => (
+          <div class="card">
+            <div class="flex items-center justify-between">
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="flex items-center space-x-4">
+                    <div class={`w-3 h-3 rounded-full ${match.isHomeGame ? 'bg-apple-link' : 'bg-apple-secondary'}`}></div>
+                    <span class="body-text text-apple-primary">
+                      {match.homeTeam} vs {match.awayTeam}
+                    </span>
+                  </div>
+                  <span class="chip text-xs">{match.competition}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="subtext text-apple-secondary">
+                    {new Date(match.date).toLocaleDateString('es-ES')}
+                  </span>
+                  {match.status === 'finished' ? (
+                    <div class="flex items-center space-x-2">
+                      <span class="h3 text-apple-primary">{match.homeScore}</span>
+                      <span class="text-apple-secondary">-</span>
+                      <span class="h3 text-apple-primary">{match.awayScore}</span>
+                    </div>
+                  ) : (
+                    <span class="chip text-xs bg-apple-strip text-apple-secondary">Próximo</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Classifications -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Clasificación Liga Regional Juvenil</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Posiciones actuales en la liga regional de balonmano juvenil
+        </p>
+      </div>
+      
+      <div class="card overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-apple-strip">
+              <tr>
+                <th class="px-4 py-3 text-left text-sm font-medium text-apple-primary">Pos</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-apple-primary">Equipo</th>
+                <th class="px-4 py-3 text-center text-sm font-medium text-apple-primary">PJ</th>
+                <th class="px-4 py-3 text-center text-sm font-medium text-apple-primary">G</th>
+                <th class="px-4 py-3 text-center text-sm font-medium text-apple-primary">E</th>
+                <th class="px-4 py-3 text-center text-sm font-medium text-apple-primary">P</th>
+                <th class="px-4 py-3 text-center text-sm font-medium text-apple-primary">GF</th>
+                <th class="px-4 py-3 text-center text-sm font-medium text-apple-primary">GC</th>
+                <th class="px-4 py-3 text-center text-sm font-medium text-apple-primary">Pts</th>
+              </tr>
+            </thead>
+            <tbody>
+              {classifications.map((team) => (
+                <tr class="border-t border-apple-hairline">
+                  <td class="px-4 py-3 text-sm font-medium text-apple-primary">
+                    {team.position === 1 ? '🥇' : team.position === 2 ? '🥈' : team.position === 3 ? '🥉' : team.position}
+                  </td>
+                  <td class="px-4 py-3 text-sm text-apple-primary font-medium">{team.team}</td>
+                  <td class="px-4 py-3 text-sm text-apple-secondary text-center">{team.gamesPlayed}</td>
+                  <td class="px-4 py-3 text-sm text-apple-secondary text-center">{team.wins}</td>
+                  <td class="px-4 py-3 text-sm text-apple-secondary text-center">{team.draws}</td>
+                  <td class="px-4 py-3 text-sm text-apple-secondary text-center">{team.losses}</td>
+                  <td class="px-4 py-3 text-sm text-apple-secondary text-center">{team.goalsFor}</td>
+                  <td class="px-4 py-3 text-sm text-apple-secondary text-center">{team.goalsAgainst}</td>
+                  <td class="px-4 py-3 text-sm font-medium text-apple-primary text-center">{team.points}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Matches -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Próximos Encuentros</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          No te pierdas los próximos partidos de nuestros equipos
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="card">
+          <div class="text-center">
+            <div class="text-sm text-apple-secondary mb-2">Liga Regional Juvenil</div>
+            <div class="h3 text-apple-primary mb-4">Villa vs Getafe CF</div>
+            <div class="flex items-center justify-center space-x-2 text-apple-secondary mb-4">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              <span>22 de Febrero, 19:00</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2 text-apple-secondary">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>Pista Principal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="text-center">
+            <div class="text-sm text-apple-secondary mb-2">Liga Regional Juvenil</div>
+            <div class="h3 text-apple-primary mb-4">Villa vs Valencia</div>
+            <div class="flex items-center justify-center space-x-2 text-apple-secondary mb-4">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              <span>1 de Marzo, 19:00</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2 text-apple-secondary">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>Pista Principal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="text-center">
+            <div class="text-sm text-apple-secondary mb-2">Liga Regional Juvenil</div>
+            <div class="h3 text-apple-primary mb-4">Barcelona vs Villa</div>
+            <div class="flex items-center justify-center space-x-2 text-apple-secondary mb-4">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              <span>8 de Marzo, 18:00</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2 text-apple-secondary">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>Palau Blaugrana</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4 text-center">
+      <h2 class="h1 mb-6">¡Ven a Apoyar a Nuestros Equipos!</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto">
+        Acompaña a nuestros equipos en sus partidos y vive la emoción del deporte en directo. 
+        La entrada es gratuita para todos los socios del club.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/club/colabora" variant="primary" size="large">
+          Hazte Socio
+        </Button>
+        <Button href="/club/contacto" variant="secondary" size="large">
+          Más Información
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,289 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actualidad', href: '/actualidad' },
+  { label: 'Galería' }
+];
+
+const galleryAlbums = [
+  {
+    id: 'torneo-balonmano-2024',
+    title: 'Torneo de Balonmano 2024',
+    description: 'Fotos del torneo anual de balonmano con equipos de toda la región',
+    coverImage: '/images/gallery/torneo-balonmano/cover.jpg',
+    eventDate: '2024-03-15',
+    photoCount: 45,
+    category: 'Competiciones'
+  },
+  {
+    id: 'campamento-verano-2023',
+    title: 'Campamento de Verano 2023',
+    description: 'Momentos del campamento deportivo de verano para niños y jóvenes',
+    coverImage: '/images/gallery/campamento-verano/cover.jpg',
+    eventDate: '2023-07-15',
+    photoCount: 78,
+    category: 'Campamentos'
+  },
+  {
+    id: 'inauguracion-padel',
+    title: 'Inauguración Pista de Pádel',
+    description: 'Celebración de la inauguración de nuestra nueva pista de pádel cubierta',
+    coverImage: '/images/gallery/inauguracion-padel/cover.jpg',
+    eventDate: '2024-01-15',
+    photoCount: 32,
+    category: 'Eventos Especiales'
+  },
+  {
+    id: 'entrenamientos-baloncesto',
+    title: 'Entrenamientos de Baloncesto',
+    description: 'Sesiones de entrenamiento del equipo juvenil de baloncesto',
+    coverImage: '/images/gallery/baloncesto/cover.jpg',
+    eventDate: '2024-01-20',
+    photoCount: 28,
+    category: 'Entrenamientos'
+  },
+  {
+    id: 'carrera-solidaria',
+    title: 'Carrera Solidaria 2023',
+    description: 'Fotos de la carrera solidaria para recaudar fondos para investigación',
+    coverImage: '/images/gallery/carrera-solidaria/cover.jpg',
+    eventDate: '2023-05-20',
+    photoCount: 56,
+    category: 'Eventos Solidarios'
+  },
+  {
+    id: 'escuela-deportiva',
+    title: 'Escuela Deportiva',
+    description: 'Actividades y juegos de la escuela deportiva infantil',
+    coverImage: '/images/gallery/escuela-deportiva/cover.jpg',
+    eventDate: '2024-01-25',
+    photoCount: 41,
+    category: 'Actividades'
+  }
+];
+
+const categories = ['Todas', 'Competiciones', 'Campamentos', 'Eventos Especiales', 'Entrenamientos', 'Eventos Solidarios', 'Actividades'];
+---
+
+<MainLayout 
+  title="Galería - Club Deportivo Villa" 
+  description="Revive los mejores momentos del Club Deportivo Villa. Galerías de eventos, entrenamientos, competiciones y actividades."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Galería
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Revive los mejores momentos de nuestros eventos, entrenamientos, competiciones y actividades deportivas
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="py-8 bg-apple-white border-b border-apple-hairline">
+    <div class="max-width-content mx-auto px-4">
+      <div class="flex flex-wrap gap-2">
+        {categories.map((category) => (
+          <button class={`chip ${category === 'Todas' ? 'bg-apple-link text-apple-white' : ''}`}>
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Albums -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Álbumes de Fotos</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Explora nuestras galerías organizadas por eventos y actividades
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {galleryAlbums.map((album) => (
+          <Card
+            title={album.title}
+            description={album.description}
+            imageUrl={album.coverImage}
+            className="h-full"
+          >
+            <div class="space-y-4">
+              <!-- Album Info -->
+              <div class="flex items-center justify-between text-sm">
+                <span class="chip text-xs">{album.category}</span>
+                <span class="text-apple-tertiary">{album.photoCount} fotos</span>
+              </div>
+              
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-apple-secondary">{new Date(album.eventDate).toLocaleDateString('es-ES')}</span>
+                <div class="flex items-center space-x-1">
+                  <svg class="w-4 h-4 text-apple-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                  <span class="text-apple-secondary">Galería</span>
+                </div>
+              </div>
+
+              <!-- CTA -->
+              <div class="pt-4 border-t border-apple-hairline">
+                <Button variant="primary" size="small" className="w-full">
+                  Ver Galería
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Photos -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Fotos Destacadas</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Algunos de los mejores momentos capturados en nuestras instalaciones
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div class="aspect-square overflow-hidden rounded-image-thumb group cursor-pointer">
+          <img 
+            src="/images/gallery/featured/1.jpg" 
+            alt="Momento deportivo" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb group cursor-pointer">
+          <img 
+            src="/images/gallery/featured/2.jpg" 
+            alt="Entrenamiento de balonmano" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb group cursor-pointer">
+          <img 
+            src="/images/gallery/featured/3.jpg" 
+            alt="Partido de baloncesto" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb group cursor-pointer">
+          <img 
+            src="/images/gallery/featured/4.jpg" 
+            alt="Actividad de pádel" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb group cursor-pointer">
+          <img 
+            src="/images/gallery/featured/5.jpg" 
+            alt="Campamento de verano" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb group cursor-pointer">
+          <img 
+            src="/images/gallery/featured/6.jpg" 
+            alt="Escuela deportiva" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Videos Destacados</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Descubre nuestros videos más populares en YouTube
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="card">
+          <div class="aspect-video bg-apple-strip rounded-image-thumb mb-4 flex items-center justify-center">
+            <div class="text-center">
+              <svg class="w-16 h-16 text-apple-secondary mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              <p class="text-apple-secondary">Video en YouTube</p>
+            </div>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Torneo de Balonmano 2024 - Resumen</h3>
+          <p class="subtext text-apple-secondary mb-4">Revive los mejores momentos del torneo anual de balonmano</p>
+          <Button variant="ghost" size="small" className="w-full">
+            Ver en YouTube
+          </Button>
+        </div>
+
+        <div class="card">
+          <div class="aspect-video bg-apple-strip rounded-image-thumb mb-4 flex items-center justify-center">
+            <div class="text-center">
+              <svg class="w-16 h-16 text-apple-secondary mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              <p class="text-apple-secondary">Video en YouTube</p>
+            </div>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Instalaciones del Club Villa</h3>
+          <p class="subtext text-apple-secondary mb-4">Recorrido virtual por todas nuestras instalaciones deportivas</p>
+          <Button variant="ghost" size="small" className="w-full">
+            Ver en YouTube
+          </Button>
+        </div>
+
+        <div class="card">
+          <div class="aspect-video bg-apple-strip rounded-image-thumb mb-4 flex items-center justify-center">
+            <div class="text-center">
+              <svg class="w-16 h-16 text-apple-secondary mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              <p class="text-apple-secondary">Video en YouTube</p>
+            </div>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Campamento de Verano 2023</h3>
+          <p class="subtext text-apple-secondary mb-4">Momentos divertidos del campamento deportivo de verano</p>
+          <Button variant="ghost" size="small" className="w-full">
+            Ver en YouTube
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4 text-center">
+      <h2 class="h1 mb-6">¿Quieres Aparecer en Nuestra Galería?</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto">
+        Participa en nuestras actividades y eventos para aparecer en futuras galerías. 
+        También puedes enviarnos tus fotos favoritas del club.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/actividades" variant="primary" size="large">
+          Ver Actividades
+        </Button>
+        <Button href="/eventos" variant="secondary" size="large">
+          Ver Eventos
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

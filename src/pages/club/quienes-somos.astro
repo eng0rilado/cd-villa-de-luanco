@@ -1,0 +1,235 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Club', href: '/club' },
+  { label: 'Quiénes Somos' }
+];
+
+const achievements = [
+  {
+    id: 'championship-2023',
+    title: 'Campeonato Regional de Balonmano',
+    year: 2023,
+    category: 'Campeonato',
+    description: 'Primer puesto en la categoría juvenil masculina'
+  },
+  {
+    id: 'recognition-2022',
+    title: 'Premio al Club Más Comprometido Socialmente',
+    year: 2022,
+    category: 'Reconocimiento',
+    description: 'Reconocimiento por nuestras iniciativas de inclusión deportiva'
+  },
+  {
+    id: 'milestone-2021',
+    title: '1000 Socios Activos',
+    year: 2021,
+    category: 'Hito',
+    description: 'Alcanzamos la cifra histórica de 1000 socios activos'
+  },
+  {
+    id: 'facility-2020',
+    title: 'Nueva Pista de Pádel Cubierta',
+    year: 2020,
+    category: 'Infraestructura',
+    description: 'Inauguración de la primera pista de pádel cubierta'
+  }
+];
+
+const values = [
+  {
+    title: 'Excelencia',
+    description: 'Buscamos la excelencia en todo lo que hacemos, desde la calidad de nuestras instalaciones hasta la formación de nuestros deportistas.',
+    icon: '🏆'
+  },
+  {
+    title: 'Compañerismo',
+    description: 'Fomentamos el trabajo en equipo y la solidaridad entre todos los miembros de nuestra comunidad deportiva.',
+    icon: '🤝'
+  },
+  {
+    title: 'Respeto',
+    description: 'Valoramos el respeto hacia los demás, las reglas del juego y el medio ambiente en todas nuestras actividades.',
+    icon: '🙏'
+  },
+  {
+    title: 'Disciplina',
+    description: 'La disciplina es fundamental para alcanzar los objetivos deportivos y personales de cada uno de nuestros socios.',
+    icon: '⚡'
+  },
+  {
+    title: 'Compromiso Social',
+    description: 'Nos comprometemos con nuestra comunidad a través de iniciativas solidarias y de inclusión deportiva.',
+    icon: '❤️'
+  }
+];
+---
+
+<MainLayout 
+  title="Quiénes Somos - Club Deportivo Villa" 
+  description="Conoce la historia, misión, visión y valores del Club Deportivo Villa. Más de 50 años promoviendo el deporte y la vida sana en nuestra comunidad."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Quiénes Somos
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Una historia de más de 50 años dedicados al deporte, la comunidad y la excelencia deportiva
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- History Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="h1 mb-6">Nuestra Historia</h2>
+          <div class="space-y-4 body-text text-apple-secondary">
+            <p>
+              Fundado en 1973, el Club Deportivo Villa ha sido un pilar fundamental en el desarrollo deportivo 
+              de nuestra ciudad. Nacido del sueño de un grupo de vecinos apasionados por el deporte, hemos 
+              crecido hasta convertirnos en una institución reconocida a nivel regional.
+            </p>
+            <p>
+              Desde nuestros humildes comienzos con una pequeña cancha de baloncesto, hemos evolucionado hasta 
+              contar con instalaciones de primer nivel que incluyen pistas de balonmano reglamentarias, 
+              pistas de pádel cubiertas, gimnasio completo y mucho más.
+            </p>
+            <p>
+              A lo largo de estos años, miles de deportistas han pasado por nuestras instalaciones, 
+              formándose no solo como atletas, sino como personas íntegras y comprometidas con su comunidad.
+            </p>
+          </div>
+        </div>
+        <div>
+          <img 
+            src="/images/club/history-1973.jpg" 
+            alt="Fundación del Club Deportivo Villa en 1973" 
+            class="w-full h-96 object-cover rounded-tile image-shadow"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="card">
+          <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-apple-white text-2xl">🎯</span>
+            </div>
+            <h3 class="h2 text-apple-primary">Nuestra Misión</h3>
+          </div>
+          <p class="body-text text-apple-secondary">
+            Promover la práctica deportiva como herramienta de desarrollo integral, fomentando valores 
+            como el compañerismo, la disciplina y la excelencia tanto en el ámbito competitivo como 
+            recreativo. Buscamos crear un espacio inclusivo donde cada persona pueda desarrollar su 
+            potencial deportivo y personal.
+          </p>
+        </div>
+        
+        <div class="card">
+          <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-apple-white text-2xl">🔮</span>
+            </div>
+            <h3 class="h2 text-apple-primary">Nuestra Visión</h3>
+          </div>
+          <p class="body-text text-apple-secondary">
+            Ser el referente deportivo de la región, reconocido por nuestra excelencia deportiva, 
+            compromiso social y capacidad de formar deportistas integrales. Aspiramos a seguir 
+            creciendo y mejorando nuestras instalaciones para ofrecer siempre la mejor experiencia 
+            deportiva a nuestra comunidad.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Nuestros Valores</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Los valores que nos guían en cada decisión y acción del club
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {values.map((value) => (
+          <div class="card text-center">
+            <div class="text-4xl mb-4">{value.icon}</div>
+            <h3 class="h3 text-apple-primary mb-3">{value.title}</h3>
+            <p class="subtext text-apple-secondary">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Logros Destacados</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Algunos de los momentos más importantes en la historia de nuestro club
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {achievements.map((achievement) => (
+          <div class="card">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-button flex items-center justify-center">
+                  <span class="text-apple-white font-semibold text-sm">{achievement.year}</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center space-x-2 mb-2">
+                  <h3 class="h3 text-apple-primary">{achievement.title}</h3>
+                  <span class="chip text-xs">{achievement.category}</span>
+                </div>
+                <p class="subtext text-apple-secondary">{achievement.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4 text-center">
+      <h2 class="h1 mb-6">Únete a Nuestra Historia</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto">
+        Forma parte de una comunidad deportiva con más de 50 años de tradición y excelencia. 
+        Descubre cómo puedes contribuir al futuro de nuestro club.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/club/colabora" variant="primary" size="large">
+          Hazte Socio
+        </Button>
+        <Button href="/actividades" variant="secondary" size="large">
+          Ver Actividades
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

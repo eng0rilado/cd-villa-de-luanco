@@ -1,0 +1,237 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actualidad', href: '/actualidad' },
+  { label: 'Noticias' }
+];
+
+const newsArticles = [
+  {
+    id: 'nueva-pista-padel',
+    title: 'Inauguración de la Nueva Pista de Pádel Cubierta',
+    excerpt: 'El Club Deportivo Villa estrena su segunda pista de pádel cubierta con tecnología de última generación.',
+    content: 'Hoy hemos inaugurado oficialmente nuestra segunda pista de pádel cubierta, equipada con la mejor tecnología del mercado. Esta nueva instalación viene a complementar nuestra oferta deportiva y responde a la creciente demanda de este deporte en nuestra comunidad.',
+    author: 'Redacción CD Villa',
+    category: 'Instalaciones',
+    tags: ['instalaciones', 'padel', 'inauguración'],
+    imageUrl: '/images/news/nueva-pista-padel.jpg',
+    publishedAt: '2024-01-15',
+    readTime: 3,
+    isFeatured: true
+  },
+  {
+    id: 'campeonato-balonmano',
+    title: 'Nuestro Equipo de Balonmano Campeón Regional',
+    excerpt: 'El equipo juvenil de balonmano se proclama campeón de la liga regional tras una temporada espectacular.',
+    content: 'En una final emocionante disputada en nuestro pabellón, nuestro equipo juvenil de balonmano se proclamó campeón de la liga regional. El equipo demostró un gran nivel técnico y táctico durante toda la temporada, culminando con esta victoria que llena de orgullo a todo el club.',
+    author: 'Carlos Martínez',
+    category: 'Deportes',
+    tags: ['balonmano', 'campeonato', 'juvenil'],
+    imageUrl: '/images/news/campeonato-balonmano.jpg',
+    publishedAt: '2024-01-10',
+    readTime: 5,
+    isFeatured: true
+  },
+  {
+    id: 'actividades-verano',
+    title: 'Nuevas Actividades para el Verano 2024',
+    excerpt: 'Descubre las nuevas actividades que hemos preparado para los meses de verano, incluyendo natación y actividades acuáticas.',
+    content: 'Para este verano 2024, hemos preparado una amplia gama de actividades que incluyen natación, waterpolo, actividades acuáticas y campamentos deportivos. Estas nuevas opciones vienen a complementar nuestra oferta estival y ofrecen alternativas refrescantes para combatir el calor.',
+    author: 'María López',
+    category: 'Actividades',
+    tags: ['verano', 'natación', 'actividades'],
+    imageUrl: '/images/news/actividades-verano.jpg',
+    publishedAt: '2024-01-05',
+    readTime: 4,
+    isFeatured: false
+  },
+  {
+    id: 'nuevo-instructor',
+    title: 'Bienvenido a Nuestro Nuevo Instructor de Ciclo Indoor',
+    excerpt: 'Nos complace anunciar la incorporación de nuestro nuevo instructor especializado en ciclo indoor.',
+    content: 'María López se incorpora a nuestro equipo como nueva instructora de ciclo indoor. Con más de 8 años de experiencia y certificaciones internacionales, María aportará nuevas dinámicas y técnicas a nuestras sesiones de ciclismo indoor.',
+    author: 'Dirección CD Villa',
+    category: 'Personal',
+    tags: ['personal', 'ciclo-indoor', 'instructor'],
+    imageUrl: '/images/news/nuevo-instructor.jpg',
+    publishedAt: '2024-01-03',
+    readTime: 3,
+    isFeatured: false
+  },
+  {
+    id: 'mejoras-instalaciones',
+    title: 'Mejoras en las Instalaciones del Gimnasio',
+    excerpt: 'Hemos renovado y mejorado el equipamiento del gimnasio con nuevas máquinas de última generación.',
+    content: 'Durante las últimas semanas hemos estado trabajando en la renovación del gimnasio. Se han instalado nuevas máquinas de cardio, pesas libres actualizadas y una nueva zona de entrenamiento funcional. Estas mejoras buscan ofrecer a nuestros socios la mejor experiencia de entrenamiento.',
+    author: 'Dirección CD Villa',
+    category: 'Instalaciones',
+    tags: ['gimnasio', 'mejoras', 'equipamiento'],
+    imageUrl: '/images/news/mejoras-gimnasio.jpg',
+    publishedAt: '2024-01-01',
+    readTime: 4,
+    isFeatured: false
+  }
+];
+
+const categories = ['Todas', 'Deportes', 'Instalaciones', 'Actividades', 'Personal', 'Eventos'];
+---
+
+<MainLayout 
+  title="Noticias - Club Deportivo Villa" 
+  description="Mantente al día con las últimas noticias del Club Deportivo Villa. Logros deportivos, novedades en instalaciones y anuncios importantes."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Noticias
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Mantente informado con las últimas novedades, logros deportivos y anuncios del Club Deportivo Villa
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="py-8 bg-apple-white border-b border-apple-hairline">
+    <div class="max-width-content mx-auto px-4">
+      <div class="flex flex-wrap gap-2">
+        {categories.map((category) => (
+          <button class={`chip ${category === 'Todas' ? 'bg-apple-link text-apple-white' : ''}`}>
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured News -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Noticias Destacadas</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Las noticias más importantes que no te puedes perder
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        {newsArticles.filter(article => article.isFeatured).map((article) => (
+          <Card
+            title={article.title}
+            description={article.excerpt}
+            imageUrl={article.imageUrl}
+            className="h-full"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-sm">
+                <span class="chip text-xs">{article.category}</span>
+                <span class="text-apple-tertiary">{article.readTime} min lectura</span>
+              </div>
+              
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-apple-secondary">Por {article.author}</span>
+                <span class="text-apple-tertiary">{new Date(article.publishedAt).toLocaleDateString('es-ES')}</span>
+              </div>
+
+              <div class="flex flex-wrap gap-1">
+                {article.tags.map((tag) => (
+                  <span class="text-xs bg-apple-strip text-apple-secondary px-2 py-1 rounded">#{tag}</span>
+                ))}
+              </div>
+
+              <div class="pt-4 border-t border-apple-hairline">
+                <Button variant="primary" size="small" className="w-full">
+                  Leer Noticia Completa
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- All News -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Todas las Noticias</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Mantente al día con todas nuestras noticias y novedades
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {newsArticles.map((article) => (
+          <Card
+            title={article.title}
+            description={article.excerpt}
+            imageUrl={article.imageUrl}
+            className="h-full"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-sm">
+                <span class="chip text-xs">{article.category}</span>
+                <span class="text-apple-tertiary">{article.readTime} min</span>
+              </div>
+              
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-apple-secondary">Por {article.author}</span>
+                <span class="text-apple-tertiary">{new Date(article.publishedAt).toLocaleDateString('es-ES')}</span>
+              </div>
+
+              <div class="pt-4 border-t border-apple-hairline">
+                <Button variant="ghost" size="small" className="w-full">
+                  Leer más
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <!-- Load More Button -->
+      <div class="text-center mt-12">
+        <Button variant="secondary" size="large">
+          Cargar Más Noticias
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="h1 mb-6">No Te Pierdas Nada</h2>
+        <p class="subtext mb-8">
+          Suscríbete a nuestro boletín y recibe las últimas noticias directamente en tu email.
+        </p>
+        
+        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input 
+            type="email" 
+            placeholder="Tu email" 
+            class="input flex-1"
+            required
+          />
+          <Button type="submit" variant="primary" size="large">
+            Suscribirse
+          </Button>
+        </form>
+        
+        <p class="caption text-apple-tertiary mt-4">
+          Recibe un resumen semanal de nuestras noticias más importantes.
+        </p>
+      </div>
+    </div>
+  </section>
+</MainLayout>

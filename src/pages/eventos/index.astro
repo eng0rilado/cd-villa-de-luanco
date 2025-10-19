@@ -1,0 +1,358 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import HeroTile from '../../components/ui/HeroTile.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Eventos' }
+];
+
+const upcomingEvents = [
+  {
+    id: 'torneo-balonmano-2024',
+    title: 'Torneo de Balonmano Villa 2024',
+    description: 'Torneo anual de balonmano con equipos de toda la región. Dos días de competición intensa con premios y reconocimientos.',
+    startDate: '2024-03-15',
+    endDate: '2024-03-16',
+    location: 'Club Deportivo Villa',
+    price: 25,
+    maxParticipants: 200,
+    currentParticipants: 150,
+    ageGroup: '16-50 años',
+    type: 'weekend',
+    imageUrl: '/images/events/torneo-balonmano-2024.jpg',
+    href: '/eventos/fin-semana',
+    features: ['Comida incluida', 'Medallas para todos', 'Trofeos para ganadores', 'Actividades paralelas']
+  },
+  {
+    id: 'campamento-verano-2024',
+    title: 'Campamento de Verano 2024',
+    description: 'Campamento deportivo de verano para niños y jóvenes. Actividades variadas, excursiones y diversión garantizada.',
+    startDate: '2024-07-01',
+    endDate: '2024-07-15',
+    location: 'Club Deportivo Villa',
+    price: 300,
+    maxParticipants: 50,
+    currentParticipants: 35,
+    ageGroup: '8-16 años',
+    type: 'camp',
+    imageUrl: '/images/events/campamento-verano-2024.jpg',
+    href: '/eventos/campamentos',
+    features: ['Comidas incluidas', 'Material deportivo', 'Actividades acuáticas', 'Excursiones']
+  },
+  {
+    id: 'carrera-solidaria-2024',
+    title: 'Carrera Solidaria 2024',
+    description: 'Carrera solidaria para recaudar fondos para la investigación del cáncer infantil. Participa y ayuda a una buena causa.',
+    startDate: '2024-05-20',
+    endDate: '2024-05-20',
+    location: 'Parque del Retiro',
+    price: 10,
+    maxParticipants: 500,
+    currentParticipants: 320,
+    ageGroup: 'Todas las edades',
+    type: 'charity',
+    imageUrl: '/images/events/carrera-solidaria-2024.jpg',
+    href: '/eventos/solidarios',
+    features: ['Camiseta conmemorativa', 'Medalla de participación', 'Aperitivo final', 'Actividades familiares']
+  }
+];
+
+const eventCategories = [
+  {
+    id: 'fin-semana',
+    title: 'Eventos de Fin de Semana',
+    description: 'Competiciones y torneos que se celebran durante los fines de semana',
+    href: '/eventos/fin-semana',
+    imageUrl: '/images/events/weekend-events.jpg',
+    count: 8
+  },
+  {
+    id: 'verano',
+    title: 'Eventos de Verano',
+    description: 'Actividades especiales durante los meses de verano',
+    href: '/eventos/verano',
+    imageUrl: '/images/events/summer-events.jpg',
+    count: 5
+  },
+  {
+    id: 'solidarios',
+    title: 'Eventos Solidarios',
+    description: 'Eventos benéficos para recaudar fondos para causas sociales',
+    href: '/eventos/solidarios',
+    imageUrl: '/images/events/charity-events.jpg',
+    count: 3
+  },
+  {
+    id: 'campamentos',
+    title: 'Campamentos',
+    description: 'Campamentos deportivos para niños y jóvenes',
+    href: '/eventos/campamentos',
+    imageUrl: '/images/events/camps.jpg',
+    count: 4
+  },
+  {
+    id: 'calendario',
+    title: 'Calendario Deportivo',
+    description: 'Consulta todos nuestros eventos en el calendario interactivo',
+    href: '/eventos/calendario',
+    imageUrl: '/images/events/calendar.jpg',
+    count: 25
+  }
+];
+---
+
+<MainLayout 
+  title="Eventos - Club Deportivo Villa" 
+  description="Descubre todos nuestros eventos deportivos: torneos, campamentos, eventos solidarios y competiciones. Únete a nuestra comunidad deportiva."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Nuestros Eventos
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Participa en nuestros eventos deportivos, torneos, campamentos y actividades solidarias. 
+          Forma parte de una comunidad activa y comprometida.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Próximos Eventos</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          No te pierdas estos eventos especiales que tenemos preparados para ti
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {upcomingEvents.map((event) => (
+          <HeroTile
+            title={event.title}
+            description={event.description}
+            imageUrl={event.imageUrl}
+            href={event.href}
+            gradient={event.type === 'weekend' ? 'blue' : event.type === 'camp' ? 'orange' : 'pink'}
+          >
+            <div class="space-y-4">
+              <!-- Event Details -->
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div class="flex items-center space-x-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                  <span>{new Date(event.startDate).toLocaleDateString('es-ES')}</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  <span>{event.location}</span>
+                </div>
+              </div>
+
+              <!-- Features -->
+              <div>
+                <h4 class="text-sm font-medium mb-2">Incluye:</h4>
+                <ul class="grid grid-cols-2 gap-1 text-xs">
+                  {event.features.map((feature) => (
+                    <li class="flex items-center space-x-1">
+                      <svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Price and Participants -->
+              <div class="flex items-center justify-between pt-4 border-t border-apple-tile-border">
+                <div class="flex items-center space-x-4 text-sm">
+                  <span class="price">{event.price}€</span>
+                  <span>{event.ageGroup}</span>
+                </div>
+                <div class="text-xs">
+                  {event.currentParticipants}/{event.maxParticipants} participantes
+                </div>
+              </div>
+            </div>
+          </HeroTile>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Event Categories -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Categorías de Eventos</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Explora nuestros diferentes tipos de eventos y encuentra el que más te interese
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {eventCategories.map((category) => (
+          <Card
+            title={category.title}
+            description={category.description}
+            imageUrl={category.imageUrl}
+            href={category.href}
+            className="h-full"
+          >
+            <div class="flex items-center justify-between pt-4 border-t border-apple-hairline">
+              <span class="text-sm text-apple-secondary">
+                {category.count} eventos
+              </span>
+              <Button href={category.href} variant="ghost" size="small">
+                Ver todos
+              </Button>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Info -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="h1 mb-6">¿Cómo Inscribirse en Eventos?</h2>
+          <div class="space-y-4 body-text text-apple-secondary">
+            <p>
+              Inscribirse en nuestros eventos es muy sencillo. Puedes hacerlo de varias formas:
+            </p>
+            <ul class="space-y-2 ml-4">
+              <li class="flex items-start space-x-2">
+                <span class="text-apple-link font-bold">1.</span>
+                <span>Visita nuestras instalaciones y habla con nuestro personal</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-apple-link font-bold">2.</span>
+                <span>Llámanos al +34 91 123 45 67</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-apple-link font-bold">3.</span>
+                <span>Envíanos un email a eventos@clubvilladeportivo.com</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-apple-link font-bold">4.</span>
+                <span>Utiliza el formulario online en cada evento</span>
+              </li>
+            </ul>
+            <p>
+              Los socios del club tienen prioridad en la inscripción y descuentos especiales en la mayoría de eventos.
+            </p>
+          </div>
+          <div class="mt-8">
+            <Button href="/club/contacto" variant="primary" size="large">
+              Contactar para Inscripción
+            </Button>
+          </div>
+        </div>
+        <div>
+          <img 
+            src="/images/events/registration.jpg" 
+            alt="Inscripción en eventos deportivos" 
+            class="w-full h-96 object-cover rounded-tile image-shadow"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Beneficios de Participar</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Por qué participar en nuestros eventos
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Comunidad</h3>
+          <p class="subtext text-apple-secondary">
+            Conoce a otros deportistas y forma parte de nuestra comunidad
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Experiencia</h3>
+          <p class="subtext text-apple-secondary">
+            Mejora tus habilidades deportivas en un ambiente competitivo
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Descuentos</h3>
+          <p class="subtext text-apple-secondary">
+            Los socios disfrutan de precios especiales en todos los eventos
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Diversión</h3>
+          <p class="subtext text-apple-secondary">
+            Disfruta de eventos divertidos y emocionantes para toda la familia
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4 text-center">
+      <h2 class="h1 mb-6">¿Listo para Participar?</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto">
+        Únete a nuestros eventos y forma parte de una comunidad deportiva activa y comprometida. 
+        Hay eventos para todas las edades e intereses.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/eventos/calendario" variant="primary" size="large">
+          Ver Calendario Completo
+        </Button>
+        <Button href="/club/contacto" variant="secondary" size="large">
+          Más Información
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

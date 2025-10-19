@@ -1,0 +1,965 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apple-like Design System Implementation */
+:root {
+  /* Colors */
+  --color-apple-white: #FFFFFF;
+  --color-apple-strip: #F5F5F7;
+  --color-apple-black: #000000;
+  --color-apple-near-black: #0B0B0C;
+  --color-apple-primary: #1D1D1F;
+  --color-apple-secondary: #6E6E73;
+  --color-apple-tertiary: #86868B;
+  --color-apple-inverse: #FFFFFF;
+  --color-apple-link: #0071E3;
+  --color-apple-link-hover: #0077ED;
+  --color-apple-link-pressed: #0060DF;
+  --color-apple-divider: #E5E5EA;
+  --color-apple-hairline: #D2D2D7;
+  --color-apple-tile-border: rgba(255,255,255,0.12);
+  --color-apple-button-primary-bg: #0071E3;
+  --color-apple-button-primary-text: #FFFFFF;
+  --color-apple-button-secondary-bg: #F5F5F7;
+  --color-apple-button-secondary-text: #1D1D1F;
+  --color-apple-button-ghost-text: #0071E3;
+  --color-apple-chip-bg: #F5F5F7;
+  --color-apple-chip-text: #1D1D1F;
+  --color-apple-input-bg: #FFFFFF;
+  --color-apple-input-border: #D2D2D7;
+  --color-apple-input-placeholder: #86868B;
+  --color-apple-dot-inactive: #D2D2D7;
+  --color-apple-dot-active: #1D1D1F;
+  --color-apple-rating-star: #FFB400;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-image: 0 8px 20px rgba(0,0,0,0.12);
+  --shadow-hover: 0 6px 16px rgba(0,0,0,0.10), 0 16px 32px rgba(0,0,0,0.12);
+  --shadow-focus-ring: 0 0 0 3px rgba(0,113,227,0.35);
+  --shadow-hero: 0 12px 40px rgba(0,0,0,0.35);
+  --shadow-hero-hover: 0 16px 48px rgba(0,0,0,0.40);
+
+  /* Typography */
+  --font-family-apple: system-ui, -apple-system, 'SF Pro Text', 'SF Pro Display', Roboto, Arial, sans-serif;
+  --font-size-display: 40px;
+  --font-size-h1: 32px;
+  --font-size-h2: 24px;
+  --font-size-h3: 19px;
+  --font-size-body: 17px;
+  --font-size-subtext: 15px;
+  --font-size-caption: 13px;
+  --font-size-price: 15px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --letter-spacing-caps-tight: -0.02em;
+
+  /* Spacing */
+  --spacing-section-y-1: 48px;
+  --spacing-section-y-2: 64px;
+  --spacing-section-y-3: 96px;
+  --spacing-card-gap: 16px;
+  --spacing-tile-gap: 24px;
+  --spacing-control-gap: 8px;
+
+  /* Border Radius */
+  --radius-card: 18px;
+  --radius-tile: 20px;
+  --radius-button: 12px;
+  --radius-chip: 18px;
+  --radius-input: 12px;
+  --radius-image-thumb: 12px;
+
+  /* Max Width */
+  --max-width-content: 1100px;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal overflow - more aggressive approach */
+*, *::before, *::after {
+  max-width: 100%;
+}
+
+/* Ensure all containers respect viewport width */
+.container, .max-width-content {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Global overflow prevention for all elements */
+html, body, div, section, article, aside, nav, header, footer, main {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Remove unnecessary scrollbars from all containers */
+*, *::before, *::after {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbars for webkit browsers */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Specific overflow prevention for common containers */
+.container, .max-width-content, .grid, .flex {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Prevent scrollbars in card and tile components */
+.card, .hero-tile {
+  overflow: visible;
+}
+
+/* Ensure sections don't have unnecessary scrollbars */
+section {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Specific fixes for index.astro sections */
+.background-image-hero,
+.section-strip,
+.bg-apple-white {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Fix grid layouts that might cause scrollbars */
+.grid {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Ensure flex containers don't create scrollbars */
+.flex {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Fix any potential overflow in content containers */
+.max-width-content {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Specific prevention for common problematic elements */
+img, video, iframe, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent text overflow - only on mobile */
+@media (max-width: 768px) {
+  p, h1, h2, h3, h4, h5, h6, span, a, button {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+html {
+  font-family: var(--font-family-apple);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body {
+  background-color: var(--color-apple-white);
+  color: var(--color-apple-primary);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%; /* Ensure body doesn't exceed viewport */
+}
+
+.background-image-hero {
+  background-image: url('../img/reloj.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 94vh;
+}
+
+
+
+/* Typography */
+.display {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.1;
+  letter-spacing: var(--letter-spacing-caps-tight);
+}
+
+.h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+}
+
+.h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+}
+
+.h3 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+}
+
+.body-text {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+}
+
+.subtext {
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  color: var(--color-apple-secondary);
+}
+
+.caption {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3;
+  color: var(--color-apple-tertiary);
+}
+
+.price {
+  font-size: var(--font-size-price);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+}
+
+/* Links */
+a {
+  color: var(--color-apple-link);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-apple-link-hover);
+}
+
+a:active {
+  color: var(--color-apple-link-pressed);
+}
+
+/* Apple-like Card Component */
+.card {
+  background: var(--color-apple-white);
+  border: 1px solid var(--color-apple-divider);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 16px 16px 20px 16px;
+  transition: all 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card:hover {
+  border-color: var(--color-apple-hairline);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.card:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-card);
+}
+
+.card:focus-within {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring), var(--shadow-card);
+}
+
+/* Apple-like Hero Tile Component */
+.hero-tile {
+  background: var(--color-apple-black);
+  border: 1px solid var(--color-apple-tile-border);
+  border-radius: var(--radius-tile);
+  box-shadow: var(--shadow-hero);
+  color: var(--color-apple-inverse);
+  transition: all 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hero-tile:hover {
+  box-shadow: var(--shadow-hero-hover);
+  transform: translateY(-2px);
+}
+
+.hero-tile:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.35) inset;
+}
+
+/* Apple-like Button Components */
+.btn-primary {
+  background: var(--color-apple-button-primary-bg);
+  color: var(--color-apple-button-primary-text);
+  border: none;
+  border-radius: var(--radius-button);
+  padding: 12px 24px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  box-shadow: 0 6px 14px rgba(0,113,227,0.22);
+  transition: all 0.12s ease;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  width: auto;
+}
+
+.btn-primary:hover {
+  background: var(--color-apple-link-hover);
+  box-shadow: 0 8px 18px rgba(0,113,227,0.28);
+}
+
+.btn-primary:active {
+  background: var(--color-apple-link-pressed);
+  box-shadow: none;
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring), 0 6px 14px rgba(0,113,227,0.22);
+}
+
+.btn-secondary {
+  background: var(--color-apple-button-secondary-bg);
+  color: var(--color-apple-button-secondary-text);
+  border: 1px solid var(--color-apple-hairline);
+  border-radius: var(--radius-button);
+  padding: 12px 24px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  transition: all 0.12s ease;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  width: auto;
+}
+
+.btn-secondary:hover {
+  background: #EBEBEE;
+  border-color: #C7C7CC;
+}
+
+.btn-secondary:active {
+  background: #E6E6EA;
+}
+
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-apple-button-ghost-text);
+  border: none;
+  padding: 12px 24px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  transition: color 0.12s ease;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  width: auto;
+}
+
+.btn-ghost:hover {
+  color: var(--color-apple-link-hover);
+}
+
+.btn-ghost:active {
+  color: var(--color-apple-link-pressed);
+}
+
+.btn-ghost:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,113,227,0.25);
+}
+
+/* Apple-like Chip Component */
+.chip {
+  background: var(--color-apple-chip-bg);
+  color: var(--color-apple-chip-text);
+  border: 1px solid var(--color-apple-divider);
+  border-radius: var(--radius-chip);
+  padding: 8px 16px;
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-regular);
+  transition: all 0.12s ease;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.chip:hover {
+  background: #EBEBEE;
+}
+
+.chip:active {
+  background: #E0E0E5;
+}
+
+.chip:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+}
+
+/* Apple-like Input Component */
+.input {
+  background: var(--color-apple-input-bg);
+  color: var(--color-apple-primary);
+  border: 1px solid var(--color-apple-input-border);
+  border-radius: var(--radius-input);
+  padding: 12px 16px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  transition: all 0.12s ease;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--color-apple-input-placeholder);
+}
+
+.input:hover {
+  border-color: #C7C7CC;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-apple-link);
+  box-shadow: var(--shadow-focus-ring), inset 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Section Strip Background */
+.section-strip {
+  background: var(--color-apple-strip);
+  border-top: 1px solid var(--color-apple-divider);
+  border-bottom: 1px solid var(--color-apple-divider);
+}
+
+/* Image Shadows */
+.image-shadow {
+  box-shadow: var(--shadow-image);
+}
+
+/* Gradient Spheres for Hero Tiles */
+.sphere-blue {
+  background: linear-gradient(135deg, #1B69F6 0%, #2AA2FF 100%);
+}
+
+.sphere-orange {
+  background: linear-gradient(135deg, #FF7A00 0%, #FF3B2F 100%);
+}
+
+.sphere-yellow {
+  background: linear-gradient(135deg, #FFD60A 0%, #FFB800 100%);
+}
+
+.sphere-pink {
+  background: linear-gradient(135deg, #FF6BCE 0%, #DA4DFF 100%);
+}
+
+/* Tile Edge Glow Effect */
+.tile-glow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(60% 60% at 50% 100%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+}
+
+/* Utility Classes */
+.max-width-content {
+  max-width: var(--max-width-content);
+}
+
+.text-inverse {
+  color: var(--color-apple-inverse);
+}
+
+.text-secondary {
+  color: var(--color-apple-secondary);
+}
+
+.text-tertiary {
+  color: var(--color-apple-tertiary);
+}
+
+.border-divider {
+  border-color: var(--color-apple-divider);
+}
+
+.border-hairline {
+  border-color: var(--color-apple-hairline);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Prevent horizontal scroll on mobile */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  /* Ensure all elements fit within viewport */
+  * {
+    max-width: 100%;
+  }
+  
+  /* Remove all unnecessary scrollbars on mobile */
+  *, *::before, *::after {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-x: hidden;
+  }
+  
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Ensure sections and containers don't have scrollbars */
+  section, .container, .max-width-content, .grid, .flex {
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+  
+  .card {
+    padding: 12px 12px 16px 12px;
+    margin: 0 auto;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    padding: 10px 20px;
+    font-size: var(--font-size-subtext);
+    max-width: 100%;
+  }
+  
+  .display {
+    font-size: 32px;
+    word-wrap: break-word;
+  }
+  
+  .h1 {
+    font-size: 28px;
+    word-wrap: break-word;
+  }
+  
+  .h2 {
+    font-size: 22px;
+    word-wrap: break-word;
+  }
+  
+  /* Ensure images don't cause horizontal scroll */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Fix any potential overflow issues */
+  .max-width-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+}
+
+/* Extra small screens (like 414px width) */
+@media (max-width: 480px) {
+  /* More aggressive overflow prevention */
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  
+  /* Ensure no element exceeds viewport */
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  /* Completely remove all scrollbars on very small screens */
+  *, *::before, *::after {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-x: hidden;
+  }
+  
+  *::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  
+  /* Force all containers to not have scrollbars */
+  section, .container, .max-width-content, .grid, .flex, .card, .hero-tile {
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+  
+  /* Reduce padding on very small screens */
+  .max-width-content {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    max-width: calc(100vw - 1.5rem);
+  }
+  
+  /* Adjust card padding */
+  .card {
+    padding: 8px 8px 12px 8px;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5rem);
+  }
+  
+  /* Smaller button padding */
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    padding: 8px 16px;
+    font-size: 14px;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  /* Smaller text sizes */
+  .display {
+    font-size: 28px;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .h1 {
+    font-size: 24px;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .h2 {
+    font-size: 20px;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Ensure all containers respect viewport */
+  .container, .max-width-content, header, nav, main, section, article, aside, footer {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Prevent horizontal scroll in grid layouts */
+  .grid {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Ensure flex containers don't overflow */
+  .flex {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Fix any potential overflow in hero sections */
+  .background-image-hero {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}
+
+/* Focus Management for Accessibility */
+.focus-visible {
+  outline: 2px solid var(--color-apple-link);
+  outline-offset: 2px;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Navigation Styles */
+/* Header specific styles to prevent overflow issues */
+header {
+  overflow: visible !important;
+}
+
+header * {
+  overflow: visible !important;
+}
+
+/* Desktop Navigation */
+.nav-link {
+  color: var(--color-apple-primary);
+  text-decoration: none;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  padding: 8px 12px;
+  border-radius: var(--radius-button);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--color-apple-link);
+  background-color: rgba(0, 113, 227, 0.08);
+}
+
+/* Desktop Dropdown Styles */
+.nav-dropdown {
+  position: relative;
+  overflow: visible !important;
+}
+
+.nav-dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  min-width: 200px;
+  background: var(--color-apple-white) !important;
+  border: 1px solid var(--color-apple-hairline);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-hover);
+  padding: 8px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 9998 !important;
+  overflow: visible !important;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-dropdown-item {
+  display: block;
+  padding: 12px 16px;
+  color: var(--color-apple-primary);
+  text-decoration: none;
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-regular);
+  transition: all 0.15s ease;
+  border-radius: 0;
+}
+
+.nav-dropdown-item:hover {
+  background-color: var(--color-apple-strip);
+  color: var(--color-apple-link);
+}
+
+.nav-dropdown-item:first-child {
+  border-radius: var(--radius-button) var(--radius-button) 0 0;
+}
+
+.nav-dropdown-item:last-child {
+  border-radius: 0 0 var(--radius-button) var(--radius-button);
+}
+
+/* Mobile Navigation Styles */
+.mobile-nav {
+  z-index: 9999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}
+
+.mobile-nav-overlay {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
+.mobile-nav-panel {
+  z-index: 2;
+  overflow-y: auto; /* Add scroll if content exceeds height */
+}
+
+/* Ensure all main menu items are always visible */
+.mobile-nav-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.mobile-nav-toggle {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  /* Remove focus/active outlines */
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.mobile-nav-toggle:focus,
+.mobile-nav-toggle:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+/* Ensure the nav container shows all items */
+.mobile-nav-panel nav {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.mobile-nav-panel nav > div {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Mobile Navigation Animations */
+.mobile-nav-panel.open {
+  transform: translateX(0);
+}
+
+.mobile-nav.open {
+  display: block;
+}
+
+/* Mobile Submenu Animations */
+.mobile-nav-submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-in-out;
+  opacity: 0;
+  display: none; /* Hidden when closed - no space taken */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.mobile-nav-submenu.open {
+  max-height: 500px;
+  opacity: 1;
+  display: block; /* Visible when open - takes space */
+  margin-top: 0.5rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.mobile-nav-toggle svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-toggle.open svg {
+  transform: rotate(180deg);
+}
+
+/* Mobile Menu Button Animation */
+.mobile-menu-button.open svg {
+  transform: rotate(90deg);
+}
+
+.mobile-menu-button.open svg path:nth-child(1) {
+  d: path("M6 6L18 18");
+}
+
+.mobile-menu-button.open svg path:nth-child(2) {
+  d: path("M6 18L18 6");
+}
+
+.mobile-menu-button.open svg path:nth-child(3) {
+  opacity: 0;
+}
+
+/* Smooth transitions for all interactive elements */
+.mobile-nav-toggle,
+.mobile-nav-submenu a,
+.nav-dropdown-item {
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+.nav-link:focus,
+.nav-dropdown-item:focus,
+.mobile-nav-toggle:focus {
+  outline: 2px solid var(--color-apple-link);
+  outline-offset: 2px;
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.mobile-menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .nav-dropdown-menu {
+    min-width: 180px;
+  }
+  
+  .nav-dropdown-item {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-nav-panel {
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  .mobile-nav-submenu {
+    max-height: 400px;
+  }
+}

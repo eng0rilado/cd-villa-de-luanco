@@ -1,0 +1,271 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Club', href: '/club' },
+  { label: 'Instalaciones' }
+];
+
+const facilities = [
+  {
+    id: 'pista-principal',
+    name: 'Pista Principal de Balonmano',
+    type: 'sports',
+    description: 'Pista reglamentaria de balonmano con superficie de parquet y capacidad para 500 espectadores.',
+    capacity: 500,
+    features: ['Iluminación LED', 'Sistema de sonido', 'Gradas móviles', 'Vestuarios adjuntos'],
+    images: ['/images/facilities/pista-principal-1.jpg', '/images/facilities/pista-principal-2.jpg'],
+    isAvailable: true,
+    bookingUrl: '/reservas/pista-principal',
+    schedule: 'Lun-Dom: 06:00-23:00'
+  },
+  {
+    id: 'cancha-baloncesto',
+    name: 'Cancha de Baloncesto',
+    type: 'sports',
+    description: 'Cancha exterior de baloncesto con superficie de cemento pulido y iluminación nocturna.',
+    capacity: 100,
+    features: ['Iluminación nocturna', 'Superficie antideslizante', 'Redes nuevas'],
+    images: ['/images/facilities/cancha-baloncesto-1.jpg'],
+    isAvailable: true,
+    schedule: 'Lun-Dom: 06:00-22:00'
+  },
+  {
+    id: 'gimnasio',
+    name: 'Gimnasio Multifuncional',
+    type: 'sports',
+    description: 'Gimnasio equipado con máquinas de última generación para entrenamiento funcional y cardio.',
+    capacity: 30,
+    features: ['Máquinas de cardio', 'Pesas libres', 'Zona de funcional', 'Vestuarios'],
+    images: ['/images/facilities/gimnasio-1.jpg', '/images/facilities/gimnasio-2.jpg'],
+    isAvailable: true,
+    schedule: 'Lun-Dom: 06:00-23:00'
+  },
+  {
+    id: 'padel-1',
+    name: 'Pista de Pádel 1',
+    type: 'sports',
+    description: 'Pista cubierta de pádel con superficie de césped artificial y iluminación LED.',
+    capacity: 4,
+    features: ['Cobertura total', 'Iluminación LED', 'Césped artificial premium', 'Sistema de ventilación'],
+    images: ['/images/facilities/padel-1.jpg'],
+    isAvailable: true,
+    bookingUrl: '/reservas/padel-1',
+    schedule: 'Lun-Dom: 08:00-22:00'
+  },
+  {
+    id: 'padel-2',
+    name: 'Pista de Pádel 2',
+    type: 'sports',
+    description: 'Segunda pista cubierta de pádel con las mismas características premium.',
+    capacity: 4,
+    features: ['Cobertura total', 'Iluminación LED', 'Césped artificial premium', 'Sistema de ventilación'],
+    images: ['/images/facilities/padel-2.jpg'],
+    isAvailable: true,
+    bookingUrl: '/reservas/padel-2',
+    schedule: 'Lun-Dom: 08:00-22:00'
+  }
+];
+---
+
+<MainLayout 
+  title="Instalaciones - Club Deportivo Villa" 
+  description="Descubre nuestras modernas instalaciones deportivas: pista de balonmano, canchas de baloncesto, pistas de pádel cubiertas, gimnasio completo y mucho más."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Nuestras Instalaciones
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Instalaciones de primer nivel equipadas con la mejor tecnología para ofrecerte 
+          la mejor experiencia deportiva
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities Grid -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Instalaciones Disponibles</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Cada instalación está diseñada para ofrecerte las mejores condiciones para practicar tu deporte favorito
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {facilities.map((facility) => (
+          <Card
+            title={facility.name}
+            description={facility.description}
+            imageUrl={facility.images[0]}
+            className="h-full"
+          >
+            <div class="space-y-4">
+              <!-- Capacity & Schedule -->
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div class="flex items-center space-x-2">
+                  <svg class="w-4 h-4 text-apple-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  </svg>
+                  <span class="text-apple-secondary">Capacidad: {facility.capacity}</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <svg class="w-4 h-4 text-apple-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span class="text-apple-secondary">Horario: {facility.schedule}</span>
+                </div>
+              </div>
+
+              <!-- Features -->
+              <div>
+                <h4 class="text-sm font-medium text-apple-primary mb-2">Características:</h4>
+                <ul class="space-y-1">
+                  {facility.features.map((feature) => (
+                    <li class="flex items-center space-x-2 text-sm">
+                      <svg class="w-3 h-3 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span class="text-apple-secondary">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Availability Status -->
+              <div class="flex items-center justify-between pt-4 border-t border-apple-hairline">
+                <div class="flex items-center space-x-2">
+                  <div class={`w-2 h-2 rounded-full ${facility.isAvailable ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                  <span class="text-sm text-apple-secondary">
+                    {facility.isAvailable ? 'Disponible' : 'No disponible'}
+                  </span>
+                </div>
+                {facility.bookingUrl && (
+                  <Button href={facility.bookingUrl} variant="ghost" size="small">
+                    Reservar
+                  </Button>
+                )}
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities Overview -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="h1 mb-6">Instalaciones de Primera</h2>
+          <div class="space-y-4 body-text text-apple-secondary">
+            <p>
+              Nuestras instalaciones han sido diseñadas pensando en la comodidad y rendimiento de nuestros socios. 
+              Cada espacio está equipado con la mejor tecnología y mantenido con los más altos estándares de calidad.
+            </p>
+            <p>
+              Desde la pista principal de balonmano con capacidad para 500 espectadores, hasta nuestras modernas 
+              pistas de pádel cubiertas con césped artificial premium, cada instalación está pensada para 
+              ofrecerte la mejor experiencia deportiva.
+            </p>
+            <p>
+              Todas nuestras instalaciones cuentan con vestuarios completos, zonas de calentamiento, 
+              iluminación LED de última generación y sistemas de climatización para tu máxima comodidad.
+            </p>
+          </div>
+          <div class="mt-8">
+            <Button href="/club/contacto" variant="primary" size="large">
+              Visita Nuestras Instalaciones
+            </Button>
+          </div>
+        </div>
+        <div>
+          <img 
+            src="/images/club/facilities-overview.jpg" 
+            alt="Vista general de las instalaciones del Club Deportivo Villa" 
+            class="w-full h-96 object-cover rounded-tile image-shadow"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Servicios Adicionales</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Además de nuestras instalaciones, ofrecemos servicios complementarios para tu comodidad
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Vestuarios Completos</h3>
+          <p class="subtext text-apple-secondary">
+            Vestuarios equipados con taquillas, duchas y secadores para tu comodidad
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Aparcamiento Gratuito</h3>
+          <p class="subtext text-apple-secondary">
+            Amplio aparcamiento gratuito para todos nuestros socios y visitantes
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-apple-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Personal de Soporte</h3>
+          <p class="subtext text-apple-secondary">
+            Personal especializado disponible para ayudarte en todo momento
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4 text-center">
+      <h2 class="h1 mb-6">¿Quieres Conocer Nuestras Instalaciones?</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto">
+        Te invitamos a visitar nuestras instalaciones y descubrir por ti mismo por qué somos 
+        el club deportivo de referencia en la región.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/club/contacto" variant="primary" size="large">
+          Solicitar Visita
+        </Button>
+        <Button href="/club/colabora" variant="secondary" size="large">
+          Hazte Socio
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

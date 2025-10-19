@@ -1,0 +1,261 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actividades', href: '/actividades' },
+  { label: 'Baloncesto' }
+];
+
+const schedules = [
+  { day: 'Lunes', time: '17:00 - 19:00', location: 'Cancha Exterior', instructor: 'Ana García' },
+  { day: 'Miércoles', time: '17:00 - 19:00', location: 'Cancha Exterior', instructor: 'Ana García' },
+  { day: 'Viernes', time: '17:00 - 19:00', location: 'Cancha Exterior', instructor: 'Ana García' }
+];
+
+const requirements = [
+  'Ropa deportiva cómoda',
+  'Calzado deportivo específico',
+  'Botella de agua',
+  'Autorización parental (menores)',
+  'Certificado médico (opcional)'
+];
+
+const benefits = [
+  'Mejora la coordinación y agilidad',
+  'Desarrolla el trabajo en equipo',
+  'Fortalece la musculatura',
+  'Mejora la resistencia cardiovascular',
+  'Fomenta la concentración y estrategia'
+];
+---
+
+<MainLayout 
+  title="Baloncesto - Club Deportivo Villa" 
+  description="Descubre el baloncesto en el Club Deportivo Villa. Entrenamientos para jóvenes y adultos con instructor certificado."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="display mb-6">Baloncesto</h1>
+          <p class="text-xl mb-8 opacity-90">
+            Desarrolla tu coordinación, velocidad y trabajo en equipo con nuestro programa de baloncesto. 
+            Un deporte dinámico que combina técnica, estrategia y condición física.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <Button href="/club/colabora" variant="secondary" size="large">
+              Inscríbete Ahora
+            </Button>
+            <Button href="/club/contacto" variant="ghost" size="large" className="text-apple-inverse border-apple-inverse hover:bg-apple-inverse hover:text-apple-link">
+              Más Información
+            </Button>
+          </div>
+        </div>
+        <div>
+          <img 
+            src="/images/activities/baloncesto-hero.jpg" 
+            alt="Entrenamiento de baloncesto" 
+            class="w-full h-96 object-cover rounded-tile image-shadow"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity Details -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-12">
+          <!-- Description -->
+          <div>
+            <h2 class="h1 mb-6">Sobre el Baloncesto</h2>
+            <div class="space-y-4 body-text text-apple-secondary">
+              <p>
+                El baloncesto es un deporte de equipo que se juega en una cancha de 28x15 metros con dos canastas 
+                situadas a 3,05 metros de altura. Es un deporte que combina velocidad, agilidad, coordinación y 
+                trabajo en equipo, ofreciendo una experiencia deportiva completa y emocionante.
+              </p>
+              <p>
+                En nuestras sesiones de entrenamiento, trabajamos tanto la técnica individual (dribbling, tiro, 
+                pase) como el juego colectivo (ataque, defensa, transiciones). Los entrenamientos están adaptados 
+                a diferentes niveles, desde principiantes hasta jugadores experimentados.
+              </p>
+              <p>
+                Nuestra instructora, Ana García, es entrenadora certificada por la Federación Española de Baloncesto 
+                con más de 10 años de experiencia. Sus entrenamientos se caracterizan por ser dinámicos, técnicos 
+                y orientados al desarrollo integral del jugador.
+              </p>
+            </div>
+          </div>
+
+          <!-- Instructor -->
+          <div class="card">
+            <div class="flex items-start space-x-4">
+              <img 
+                src="/images/instructors/ana-garcia.jpg" 
+                alt="Ana García - Instructora de Baloncesto" 
+                class="w-20 h-20 rounded-full object-cover"
+              />
+              <div class="flex-1">
+                <h3 class="h2 text-apple-primary mb-2">Ana García</h3>
+                <p class="subtext text-apple-secondary mb-3">Instructora Certificada</p>
+                <p class="body-text text-apple-secondary">
+                  Entrenadora certificada por la Federación Española de Baloncesto con 10 años de experiencia. 
+                  Especializada en formación técnica y desarrollo de jóvenes jugadores.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-8">
+          <!-- Schedule -->
+          <Card title="Horarios" className="h-fit">
+            <div class="space-y-4">
+              {schedules.map((schedule) => (
+                <div class="flex items-center justify-between py-2 border-b border-apple-hairline last:border-b-0">
+                  <div>
+                    <div class="font-medium text-apple-primary">{schedule.day}</div>
+                    <div class="text-sm text-apple-secondary">{schedule.time}</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-sm text-apple-secondary">{schedule.location}</div>
+                    <div class="text-xs text-apple-tertiary">{schedule.instructor}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="pt-4 border-t border-apple-hairline mt-4">
+              <div class="flex items-center justify-between">
+                <span class="text-apple-primary font-medium">Precio:</span>
+                <span class="price text-apple-primary">35€/mes</span>
+              </div>
+            </div>
+          </Card>
+
+          <!-- Requirements -->
+          <Card title="Requisitos" className="h-fit">
+            <ul class="space-y-2">
+              {requirements.map((requirement) => (
+                <li class="flex items-center space-x-2 text-sm">
+                  <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-apple-secondary">{requirement}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          <!-- Benefits -->
+          <Card title="Beneficios" className="h-fit">
+            <ul class="space-y-2">
+              {benefits.map((benefit) => (
+                <li class="flex items-center space-x-2 text-sm">
+                  <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                  <span class="text-apple-secondary">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          <!-- CTA -->
+          <div class="space-y-4">
+            <Button href="/club/colabora" variant="primary" size="large" className="w-full">
+              Inscríbete Ahora
+            </Button>
+            <Button href="/club/contacto" variant="secondary" size="large" className="w-full">
+              Contactar
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Galería</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Momentos de nuestros entrenamientos y partidos
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/baloncesto-1.jpg" 
+            alt="Entrenamiento de baloncesto" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/baloncesto-2.jpg" 
+            alt="Partido de baloncesto" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/baloncesto-3.jpg" 
+            alt="Equipo de baloncesto" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/baloncesto-4.jpg" 
+            alt="Entrenamiento técnico" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Activities -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Otras Actividades</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Descubre otras actividades que también podrían interesarte
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card
+          title="Balonmano"
+          description="Deporte de equipo dinámico y emocionante"
+          imageUrl="/images/activities/balonmano.jpg"
+          href="/actividades/balonmano"
+        />
+        <Card
+          title="Full Body"
+          description="Entrenamiento funcional completo"
+          imageUrl="/images/activities/full-body.jpg"
+          href="/actividades/full-body"
+        />
+        <Card
+          title="Escuela Deportiva"
+          description="Programa integral para niños"
+          imageUrl="/images/activities/escuela-deportiva.jpg"
+          href="/actividades/escuela-deportiva"
+        />
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,359 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actividades', href: '/actividades' },
+  { label: 'Escuela Deportiva' }
+];
+
+const schedules = [
+  { day: 'Sábado', time: '16:00 - 17:30', location: 'Pista Principal', instructor: 'Laura Rodríguez' },
+  { day: 'Domingo', time: '16:00 - 17:30', location: 'Pista Principal', instructor: 'Laura Rodríguez' }
+];
+
+const requirements = [
+  'Autorización médica',
+  'Ropa deportiva cómoda',
+  'Botella de agua',
+  'Calzado deportivo',
+  'Autorización parental'
+];
+
+const benefits = [
+  'Desarrollo motor integral',
+  'Fomento de valores deportivos',
+  'Mejora la coordinación',
+  'Desarrolla habilidades sociales',
+  'Promueve hábitos saludables'
+];
+
+const ageGroups = [
+  {
+    range: '6-8 años',
+    description: 'Grupo de iniciación con juegos y actividades básicas',
+    focus: 'Desarrollo motor básico y diversión'
+  },
+  {
+    range: '9-10 años',
+    description: 'Introducción a deportes específicos y habilidades',
+    focus: 'Técnica básica y coordinación'
+  },
+  {
+    range: '11-12 años',
+    description: 'Especialización deportiva y competición amistosa',
+    focus: 'Técnica avanzada y táctica'
+  }
+];
+---
+
+<MainLayout 
+  title="Escuela Deportiva - Club Deportivo Villa" 
+  description="Escuela deportiva infantil del Club Deportivo Villa. Programa integral para niños de 6 a 12 años con desarrollo motor y valores deportivos."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="display mb-6">Escuela Deportiva</h1>
+          <p class="text-xl mb-8 opacity-90">
+            Programa integral para niños de 6 a 12 años. Desarrollo motor y valores deportivos 
+            a través del juego y la diversión.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <Button href="/club/colabora" variant="secondary" size="large">
+              Inscríbete Ahora
+            </Button>
+            <Button href="/club/contacto" variant="ghost" size="large" className="text-apple-inverse border-apple-inverse hover:bg-apple-inverse hover:text-apple-link">
+              Más Información
+            </Button>
+          </div>
+        </div>
+        <div>
+          <img 
+            src="/images/activities/escuela-deportiva-hero.jpg" 
+            alt="Escuela deportiva infantil" 
+            class="w-full h-96 object-cover rounded-tile image-shadow"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity Details -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-12">
+          <!-- Description -->
+          <div>
+            <h2 class="h1 mb-6">Sobre la Escuela Deportiva</h2>
+            <div class="space-y-4 body-text text-apple-secondary">
+              <p>
+                Nuestra Escuela Deportiva está diseñada para niños de 6 a 12 años y tiene como objetivo 
+                desarrollar las habilidades motoras básicas a través del juego y la diversión. 
+                Creemos que el deporte es una herramienta fundamental para el desarrollo integral de los niños.
+              </p>
+              <p>
+                El programa combina diferentes actividades deportivas adaptadas a cada edad, incluyendo 
+                balonmano, baloncesto, atletismo, juegos tradicionales y actividades de coordinación. 
+                Todo está diseñado para que los niños disfruten mientras aprenden y se desarrollan.
+              </p>
+              <p>
+                Nuestra instructora, Laura Rodríguez, es profesora de educación física especializada en 
+                deporte infantil. Su metodología se basa en el juego, la diversión y el respeto por 
+                el ritmo de desarrollo de cada niño, creando un ambiente seguro y motivador.
+              </p>
+            </div>
+          </div>
+
+          <!-- Instructor -->
+          <div class="card">
+            <div class="flex items-start space-x-4">
+              <img 
+                src="/images/instructors/laura-rodriguez.jpg" 
+                alt="Laura Rodríguez - Instructora de Escuela Deportiva" 
+                class="w-20 h-20 rounded-full object-cover"
+              />
+              <div class="flex-1">
+                <h3 class="h2 text-apple-primary mb-2">Laura Rodríguez</h3>
+                <p class="subtext text-apple-secondary mb-3">Profesora de Educación Física</p>
+                <p class="body-text text-apple-secondary">
+                  Profesora de educación física especializada en deporte infantil con más de 8 años de experiencia. 
+                  Especialista en desarrollo motor y valores deportivos para niños.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-8">
+          <!-- Schedule -->
+          <Card title="Horarios" className="h-fit">
+            <div class="space-y-4">
+              {schedules.map((schedule) => (
+                <div class="flex items-center justify-between py-2 border-b border-apple-hairline last:border-b-0">
+                  <div>
+                    <div class="font-medium text-apple-primary">{schedule.day}</div>
+                    <div class="text-sm text-apple-secondary">{schedule.time}</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-sm text-apple-secondary">{schedule.location}</div>
+                    <div class="text-xs text-apple-tertiary">{schedule.instructor}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="pt-4 border-t border-apple-hairline mt-4">
+              <div class="flex items-center justify-between">
+                <span class="text-apple-primary font-medium">Precio:</span>
+                <span class="price text-apple-primary">40€/mes</span>
+              </div>
+            </div>
+          </Card>
+
+          <!-- Requirements -->
+          <Card title="Requisitos" className="h-fit">
+            <ul class="space-y-2">
+              {requirements.map((requirement) => (
+                <li class="flex items-center space-x-2 text-sm">
+                  <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-apple-secondary">{requirement}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          <!-- Benefits -->
+          <Card title="Beneficios" className="h-fit">
+            <ul class="space-y-2">
+              {benefits.map((benefit) => (
+                <li class="flex items-center space-x-2 text-sm">
+                  <svg class="w-4 h-4 text-apple-link flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                  <span class="text-apple-secondary">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          <!-- CTA -->
+          <div class="space-y-4">
+            <Button href="/club/colabora" variant="primary" size="large" className="w-full">
+              Inscríbete Ahora
+            </Button>
+            <Button href="/club/contacto" variant="secondary" size="large" className="w-full">
+              Contactar
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Age Groups Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Grupos por Edades</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Cada grupo está adaptado a las necesidades específicas de cada edad
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {ageGroups.map((group) => (
+          <div class="card text-center">
+            <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-apple-white font-semibold text-lg">{group.range.split('-')[0]}</span>
+            </div>
+            <h3 class="h3 text-apple-primary mb-2">{group.range}</h3>
+            <p class="subtext text-apple-secondary mb-4">{group.description}</p>
+            <div class="bg-apple-strip rounded-button p-3">
+              <p class="text-sm text-apple-primary font-medium">{group.focus}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Actividades Incluidas</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Descubre las actividades que realizamos en nuestra escuela deportiva
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white text-2xl">🏃‍♂️</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Atletismo</h3>
+          <p class="subtext text-apple-secondary">
+            Carreras, saltos y lanzamientos adaptados a cada edad
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white text-2xl">🏀</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Baloncesto</h3>
+          <p class="subtext text-apple-secondary">
+            Fundamentos básicos del baloncesto de forma divertida
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white text-2xl">🤾‍♂️</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Balonmano</h3>
+          <p class="subtext text-apple-secondary">
+            Introducción al balonmano con juegos y actividades
+          </p>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white text-2xl">🎯</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-3">Juegos</h3>
+          <p class="subtext text-apple-secondary">
+            Juegos tradicionales y de coordinación
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Galería</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Momentos divertidos de nuestra escuela deportiva
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/escuela-1.jpg" 
+            alt="Escuela deportiva" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/escuela-2.jpg" 
+            alt="Actividades infantiles" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/escuela-3.jpg" 
+            alt="Juegos deportivos" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-image-thumb">
+          <img 
+            src="/images/gallery/escuela-4.jpg" 
+            alt="Grupo de niños" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Activities -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Otras Actividades</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Descubre otras actividades que también podrían interesarte
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card
+          title="Baloncesto"
+          description="Desarrolla coordinación y trabajo en equipo"
+          imageUrl="/images/activities/baloncesto.jpg"
+          href="/actividades/baloncesto"
+        />
+        <Card
+          title="Balonmano"
+          description="Deporte de equipo dinámico"
+          imageUrl="/images/activities/balonmano.jpg"
+          href="/actividades/balonmano"
+        />
+        <Card
+          title="Pádel"
+          description="Aprende este deporte de raqueta"
+          imageUrl="/images/activities/padel.jpg"
+          href="/actividades/padel"
+        />
+      </div>
+    </div>
+  </section>
+</MainLayout>

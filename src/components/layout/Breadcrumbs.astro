@@ -1,0 +1,58 @@
+---
+export interface Props {
+  items: Array<{
+    label: string;
+    href?: string;
+  }>;
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="bg-apple-strip border-b border-apple-hairline" aria-label="Breadcrumb">
+  <div class="max-width-content mx-auto px-4">
+    <ol class="flex items-center space-x-2 py-3" itemscope itemtype="https://schema.org/BreadcrumbList">
+      {items.map((item, index) => (
+        <li 
+          class="flex items-center" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem"
+        >
+          {index > 0 && (
+            <svg class="w-4 h-4 text-apple-tertiary mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          )}
+          
+          {item.href ? (
+            <a 
+              href={item.href} 
+              class="text-apple-secondary hover:text-apple-primary transition-colors"
+              itemprop="item"
+            >
+              <span itemprop="name">{item.label}</span>
+            </a>
+          ) : (
+            <span class="text-apple-primary font-medium" itemprop="name">
+              {item.label}
+            </span>
+          )}
+          
+          <meta itemprop="position" content={index + 1} />
+        </li>
+      ))}
+    </ol>
+  </div>
+</nav>
+
+<style>
+  /* Ensure proper spacing for breadcrumb items */
+  nav ol li:first-child {
+    margin-left: 0;
+  }
+  
+  nav ol li:last-child {
+    margin-right: 0;
+  }
+</style>

@@ -1,0 +1,249 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actualidad', href: '/actualidad' },
+  { label: 'Noticias Destacadas' }
+];
+
+const featuredNews = [
+  {
+    id: 'nueva-pista-padel',
+    title: 'Inauguración de la Nueva Pista de Pádel Cubierta',
+    excerpt: 'El Club Deportivo Villa estrena su segunda pista de pádel cubierta con tecnología de última generación.',
+    content: 'Hoy hemos inaugurado oficialmente nuestra segunda pista de pádel cubierta, equipada con la mejor tecnología del mercado. Esta nueva instalación viene a complementar nuestra oferta deportiva y responde a la creciente demanda de este deporte en nuestra comunidad.',
+    author: 'Redacción CD Villa',
+    category: 'Instalaciones',
+    tags: ['instalaciones', 'padel', 'inauguración'],
+    imageUrl: '/images/news/nueva-pista-padel.jpg',
+    publishedAt: '2024-01-15',
+    readTime: 3,
+    isFeatured: true
+  },
+  {
+    id: 'campeonato-balonmano',
+    title: 'Nuestro Equipo de Balonmano Campeón Regional',
+    excerpt: 'El equipo juvenil de balonmano se proclama campeón de la liga regional tras una temporada espectacular.',
+    content: 'En una final emocionante disputada en nuestro pabellón, nuestro equipo juvenil de balonmano se proclamó campeón de la liga regional. El equipo demostró un gran nivel técnico y táctico durante toda la temporada, culminando con esta victoria que llena de orgullo a todo el club.',
+    author: 'Carlos Martínez',
+    category: 'Deportes',
+    tags: ['balonmano', 'campeonato', 'juvenil'],
+    imageUrl: '/images/news/campeonato-balonmano.jpg',
+    publishedAt: '2024-01-10',
+    readTime: 5,
+    isFeatured: true
+  },
+  {
+    id: 'nuevo-record-socios',
+    title: 'Superamos los 1000 Socios Activos',
+    excerpt: 'El Club Deportivo Villa alcanza un hito histórico al superar los 1000 socios activos en sus instalaciones.',
+    content: 'Estamos muy orgullosos de anunciar que hemos superado la cifra de 1000 socios activos, un hito histórico para nuestro club. Este logro refleja la confianza que la comunidad deposita en nosotros y nuestro compromiso con la excelencia deportiva.',
+    author: 'Dirección CD Villa',
+    category: 'Club',
+    tags: ['socios', 'hito', 'crecimiento'],
+    imageUrl: '/images/news/1000-socios.jpg',
+    publishedAt: '2024-01-08',
+    readTime: 4,
+    isFeatured: true
+  },
+  {
+    id: 'premio-responsabilidad-social',
+    title: 'Premio a la Responsabilidad Social Deportiva',
+    excerpt: 'El Club Deportivo Villa recibe el reconocimiento por su compromiso con la inclusión y responsabilidad social.',
+    content: 'Hemos sido galardonados con el Premio a la Responsabilidad Social Deportiva por nuestras iniciativas de inclusión deportiva y programas para personas con discapacidad. Este reconocimiento nos motiva a seguir trabajando por un deporte más inclusivo y accesible.',
+    author: 'María López',
+    category: 'Reconocimientos',
+    tags: ['premio', 'responsabilidad-social', 'inclusión'],
+    imageUrl: '/images/news/premio-responsabilidad.jpg',
+    publishedAt: '2024-01-05',
+    readTime: 6,
+    isFeatured: true
+  }
+];
+---
+
+<MainLayout 
+  title="Noticias Destacadas - Club Deportivo Villa" 
+  description="Las noticias más importantes y destacadas del Club Deportivo Villa. Logros, inauguraciones y reconocimientos que no te puedes perder."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse py-20">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="display mb-6">
+          Noticias Destacadas
+        </h1>
+        <p class="text-xl mb-8 opacity-90">
+          Las noticias más importantes del Club Deportivo Villa. Logros, inauguraciones, 
+          reconocimientos y momentos históricos que marcan nuestro camino.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured News -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Noticias de Importancia</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Los acontecimientos más relevantes que han marcado la historia reciente de nuestro club
+        </p>
+      </div>
+      
+      <div class="space-y-12">
+        {featuredNews.map((article, index) => (
+          <div class={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+            <div class={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+              <img 
+                src={article.imageUrl} 
+                alt={article.title} 
+                class="w-full h-80 object-cover rounded-tile image-shadow"
+              />
+            </div>
+            <div class={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+              <div class="space-y-6">
+                <div class="flex items-center space-x-4">
+                  <span class="chip text-xs">{article.category}</span>
+                  <span class="text-apple-tertiary text-sm">{article.readTime} min lectura</span>
+                </div>
+                
+                <h3 class="h1 text-apple-primary">{article.title}</h3>
+                
+                <p class="body-text text-apple-secondary">{article.excerpt}</p>
+                
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-apple-secondary text-sm">Por {article.author}</span>
+                    <span class="text-apple-tertiary">•</span>
+                    <span class="text-apple-tertiary text-sm">{new Date(article.publishedAt).toLocaleDateString('es-ES')}</span>
+                  </div>
+                </div>
+                
+                <div class="flex flex-wrap gap-2">
+                  {article.tags.map((tag) => (
+                    <span class="text-xs bg-apple-strip text-apple-secondary px-2 py-1 rounded">#{tag}</span>
+                  ))}
+                </div>
+                
+                <Button variant="primary" size="large">
+                  Leer Noticia Completa
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="h1 mb-6">Boletín de Noticias Destacadas</h2>
+        <p class="subtext mb-8">
+          Suscríbete a nuestro boletín especial y recibe solo las noticias más importantes 
+          del Club Deportivo Villa directamente en tu email.
+        </p>
+        
+        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input 
+            type="email" 
+            placeholder="Tu email" 
+            class="input flex-1"
+            required
+          />
+          <Button type="submit" variant="primary" size="large">
+            Suscribirse
+          </Button>
+        </form>
+        
+        <p class="caption text-apple-tertiary mt-4">
+          Recibe un resumen mensual con las noticias más destacadas del club.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Archive Section -->
+  <section class="py-16 bg-apple-white">
+    <div class="max-width-content mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="h1 mb-4">Archivo de Noticias Destacadas</h2>
+        <p class="subtext max-w-2xl mx-auto">
+          Explora las noticias destacadas de meses anteriores
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white font-semibold text-lg">Ene</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Enero 2024</h3>
+          <p class="subtext text-apple-secondary mb-4">4 noticias destacadas</p>
+          <Button variant="ghost" size="small">
+            Ver Archivo
+          </Button>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white font-semibold text-lg">Dic</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Diciembre 2023</h3>
+          <p class="subtext text-apple-secondary mb-4">6 noticias destacadas</p>
+          <Button variant="ghost" size="small">
+            Ver Archivo
+          </Button>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white font-semibold text-lg">Nov</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Noviembre 2023</h3>
+          <p class="subtext text-apple-secondary mb-4">3 noticias destacadas</p>
+          <Button variant="ghost" size="small">
+            Ver Archivo
+          </Button>
+        </div>
+        
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-apple-link to-apple-link-hover rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-apple-white font-semibold text-lg">Oct</span>
+          </div>
+          <h3 class="h3 text-apple-primary mb-2">Octubre 2023</h3>
+          <p class="subtext text-apple-secondary mb-4">5 noticias destacadas</p>
+          <Button variant="ghost" size="small">
+            Ver Archivo
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-strip py-16">
+    <div class="max-width-content mx-auto px-4 text-center">
+      <h2 class="h1 mb-6">Mantente Informado</h2>
+      <p class="subtext mb-8 max-w-2xl mx-auto">
+        No te pierdas ninguna noticia importante del Club Deportivo Villa. 
+        Síguenos en redes sociales y suscríbete a nuestro boletín.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/actualidad/noticias" variant="primary" size="large">
+          Ver Todas las Noticias
+        </Button>
+        <Button href="/club/contacto" variant="secondary" size="large">
+          Contactar
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

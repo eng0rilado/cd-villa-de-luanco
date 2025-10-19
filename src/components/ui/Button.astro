@@ -1,0 +1,105 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'small' | 'medium' | 'large';
+  href?: string;
+  disabled?: boolean;
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const { 
+  variant = 'primary', 
+  size = 'medium', 
+  href, 
+  disabled = false, 
+  className = '',
+  type = 'button'
+} = Astro.props;
+
+const getVariantClass = (variant: string) => {
+  switch (variant) {
+    case 'primary': return 'btn-primary';
+    case 'secondary': return 'btn-secondary';
+    case 'ghost': return 'btn-ghost';
+    default: return 'btn-primary';
+  }
+};
+
+const getSizeClass = (size: string) => {
+  switch (size) {
+    case 'small': return 'px-3 py-2 text-sm';
+    case 'large': return 'px-6 py-4 text-lg';
+    default: return 'px-4 py-3 text-base';
+  }
+};
+
+const buttonClass = `${getVariantClass(variant)} ${getSizeClass(size)} ${className}`;
+
+---
+
+{href ? (
+  <a 
+    href={href} 
+    class={buttonClass}
+    role="button"
+    aria-disabled={disabled}
+  >
+    <span class="flex items-center justify-center space-x-2">
+      <slot />
+    </span>
+  </a>
+) : (
+  <button 
+    type={type}
+    class={buttonClass}
+    disabled={disabled}
+    aria-disabled={disabled}
+  >
+    <span class="flex items-center justify-center space-x-2">
+      <slot />
+    </span>
+  </button>
+)}
+
+<style>
+  /* Disabled state styling */
+  button:disabled,
+  a[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  /* Focus states for better accessibility */
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--color-apple-link);
+    outline-offset: 2px;
+  }
+  
+  /* Loading state */
+  .btn-loading {
+    position: relative;
+    color: transparent;
+  }
+  
+  .btn-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>

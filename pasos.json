@@ -1,0 +1,417 @@
+{
+    "meta": {
+      "name": "Apple-like Accessory & Home – Visual Language",
+      "version": "1.0",
+      "sourceScreens": [
+        "shop/accessories (long card lists)",
+        "tv-and-home (hero promo tiles with gradients)"
+      ],
+      "implementationNotes": {
+        "grid": "12-col, max content width ~980–1100px; sections on soft-gray strips (#F5F5F7).",
+        "spacing": {
+          "sectionY": [48, 64, 96],
+          "cardGap": 16,
+          "tileGap": 24,
+          "controlGap": 8
+        },
+        "radii": {
+          "card": 18,
+          "tile": 20,
+          "button": 12,
+          "chip": 18,
+          "input": 12,
+          "imageThumb": 12
+        },
+        "elevation": {
+          "flat": "none",
+          "card": "0 1px 2px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.08)",
+          "hover": "0 6px 16px rgba(0,0,0,0.10), 0 16px 32px rgba(0,0,0,0.12)",
+          "focusRing": "0 0 0 3px rgba(0,113,227,0.35)"
+        },
+        "typography": {
+          "fontFamily": "system-ui, -apple-system, 'SF Pro Text', 'SF Pro Display', Roboto, Arial, sans-serif",
+          "sizes": {
+            "display": 40,
+            "h1": 32,
+            "h2": 24,
+            "h3": 19,
+            "body": 17,
+            "subtext": 15,
+            "caption": 13,
+            "price": 15
+          },
+          "weights": {
+            "regular": 400,
+            "medium": 500,
+            "semibold": 600
+          },
+          "letterSpacing": {
+            "capsTight": -0.02,
+            "body": 0
+          }
+        }
+      }
+    },
+  
+    "tokens": {
+      "colors": {
+        "background": {
+          "pageWhite": "#FFFFFF",
+          "sectionStrip": "#F5F5F7",          
+          "tileBlack": "#000000",              
+          "tileNearBlack": "#0B0B0C"
+        },
+        "text": {
+          "primary": "#1D1D1F",               
+          "secondary": "#6E6E73",
+          "tertiary": "#86868B",
+          "inverse": "#FFFFFF",
+          "link": "#0071E3",                
+          "linkHover": "#0077ED",
+          "linkPressed": "#0060DF"
+        },
+        "lines": {
+          "divider": "#E5E5EA",
+          "hairline": "#D2D2D7",
+          "tileBorder": "rgba(255,255,255,0.12)" 
+        },
+        "controls": {
+          "buttonPrimaryBg": "#0071E3",
+          "buttonPrimaryText": "#FFFFFF",
+          "buttonSecondaryBg": "#F5F5F7",
+          "buttonSecondaryText": "#1D1D1F",
+          "buttonGhostText": "#0071E3",
+          "chipBg": "#F5F5F7",
+          "chipText": "#1D1D1F",
+          "inputBg": "#FFFFFF",
+          "inputBorder": "#D2D2D7",
+          "inputPlaceholder": "#86868B"
+        },
+        "decorative": {
+          "dotInactive": "#D2D2D7",
+          "dotActive": "#1D1D1F",
+          "ratingStar": "#FFB400"
+        },
+        "shadows": {
+          "key": "rgba(0,0,0,0.12)",
+          "ambient": "rgba(0,0,0,0.06)"
+        },
+        "gradients": {
+          "sphereBlue": "linear-gradient(135deg, #1B69F6 0%, #2AA2FF 100%)",
+          "sphereOrange": "linear-gradient(135deg, #FF7A00 0%, #FF3B2F 100%)",
+          "sphereYellow": "linear-gradient(135deg, #FFD60A 0%, #FFB800 100%)",
+          "spherePink": "linear-gradient(135deg, #FF6BCE 0%, #DA4DFF 100%)",
+          "tileEdgeGlow": "radial-gradient(60% 60% at 50% 100%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%)"
+        }
+      },
+      "contrast": {
+        "primaryOnWhite": 16.83,
+        "secondaryOnWhite": 5.07,
+        "tertiaryOnWhite": 3.62,
+        "primaryOnStrip": 15.46
+      },
+      "shadows": {
+        "card": "0 1px 2px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.08)",
+        "image": "0 8px 20px rgba(0,0,0,0.12)",
+        "hover": "0 6px 16px rgba(0,0,0,0.10), 0 16px 32px rgba(0,0,0,0.12)"
+      }
+    },
+  
+    "elementStyling": {
+      "page": {
+        "selectors": [":root", "body", ".page"],
+        "background": {"default": "{tokens.colors.background.pageWhite}"},
+        "text": {"color": "{tokens.colors.text.primary}"},
+        "links": {
+          "color": "{tokens.colors.text.link}",
+          "hover": {"color": "{tokens.colors.text.linkHover}"},
+          "active": {"color": "{tokens.colors.text.linkPressed}"}
+        }
+      },
+  
+      "sectionStrip": {
+        "selectors": [".section--strip", "section.bg-strip"],
+        "background": {"default": "{tokens.colors.background.sectionStrip}"},
+        "borders": {"top": "{tokens.colors.lines.divider}", "bottom": "{tokens.colors.lines.divider}"},
+        "note": "Used behind clusters of cards/lists to separate from white canvas."
+      },
+  
+      "cards": {
+        "selectors": [".card", ".product-card", ".band-card", ".accessory-card"],
+        "background": {
+          "container": "#FFFFFF",                    
+          "contentArea": "transparent"              
+        },
+        "border": {"color": "#E5E5EA", "width": 1, "style": "solid"},
+        "shadow": "{tokens.shadows.card}",
+        "radius": 18,
+        "padding": [16, 16, 20, 16],
+        "icons": {
+          "fill": "#1D1D1F",
+          "background": "transparent",
+          "container": "none"
+        },
+        "hover": {
+          "shadow": "{tokens.shadows.hover}",
+          "border": {"color": "#D2D2D7"},
+          "transform": "translateY(-2px)"
+        },
+        "active": {"transform": "translateY(0)", "shadow": "{tokens.shadows.card}"},
+        "focus": {"ring": "{meta.implementationNotes.elevation.focusRing}"},
+        "disabled": {"opacity": 0.5, "cursor": "not-allowed"},
+        "image": {"shadow": "{tokens.shadows.image}", "radius": 12, "background": "transparent"}
+      },
+  
+      "heroTiles": {
+        "selectors": [".tile", ".promo-tile", ".hero-card"],
+        "background": {"default": "{tokens.colors.background.tileBlack}"},
+        "border": {"color": "{tokens.colors.lines.tileBorder}", "width": 1},
+        "radius": 20,
+        "shadow": "0 12px 40px rgba(0,0,0,0.35)",
+        "content": {
+          "title": {"color": "{tokens.colors.text.inverse}"},
+          "subtitle": {"color": "rgba(255,255,255,0.82)"},
+          "price": {"color": "rgba(255,255,255,0.92)"}
+        },
+        "decor": {
+          "gradientOrb": {
+            "application": "background of circular product spheres only",
+            "blue": "{tokens.colors.gradients.sphereBlue}",
+            "orange": "{tokens.colors.gradients.sphereOrange}",
+            "yellow": "{tokens.colors.gradients.sphereYellow}",
+            "pink": "{tokens.colors.gradients.spherePink}"
+          },
+          "edgeGlow": "{tokens.colors.gradients.tileEdgeGlow}"
+        },
+        "hover": {"translateY": -2, "shadow": "0 16px 48px rgba(0,0,0,0.40)"},
+        "focus": {"ring": "0 0 0 3px rgba(255,255,255,0.35) inset"}
+      },
+  
+      "lists": {
+        "selectors": [".product-row", ".featured-row"],
+        "title": {"color": "{tokens.colors.text.primary}", "size": "{meta.implementationNotes.typography.sizes.h3}"},
+        "subtitle": {"color": "{tokens.colors.text.secondary}"},
+        "seeAllLink": {"color": "{tokens.colors.text.link}", "hover": {"color": "{tokens.colors.text.linkHover}"}}
+      },
+  
+      "buttons": {
+        "primary": {
+          "selectors": [".btn", ".btn-primary", "a.cta-blue"],
+          "background": "{tokens.colors.controls.buttonPrimaryBg}",
+          "text": "{tokens.colors.controls.buttonPrimaryText}",
+          "icon": {"fill": "{tokens.colors.controls.buttonPrimaryText}"},
+          "border": {"color": "transparent"},
+          "radius": 12,
+          "shadow": "0 6px 14px rgba(0,113,227,0.22)",
+          "hover": {"background": "{tokens.colors.text.linkHover}", "shadow": "0 8px 18px rgba(0,113,227,0.28)"},
+          "active": {"background": "{tokens.colors.text.linkPressed}", "shadow": "none"},
+          "disabled": {"background": "rgba(0,113,227,0.35)", "text": "rgba(255,255,255,0.75)"},
+          "focus": {"ring": "{meta.implementationNotes.elevation.focusRing}"}
+        },
+        "secondary": {
+          "selectors": [".btn-secondary"],
+          "background": "{tokens.colors.controls.buttonSecondaryBg}",
+          "text": "{tokens.colors.controls.buttonSecondaryText}",
+          "border": {"color": "#D2D2D7"},
+          "hover": {"background": "#EBEBEE", "border": {"color": "#C7C7CC"}},
+          "active": {"background": "#E6E6EA"},
+          "disabled": {"opacity": 0.55}
+        },
+        "ghost": {
+          "selectors": [".btn-ghost", ".link-cta"],
+          "background": "transparent",
+          "text": "{tokens.colors.text.link}",
+          "icon": {"fill": "{tokens.colors.text.link}"},
+          "hover": {"text": "{tokens.colors.text.linkHover}"},
+          "active": {"text": "{tokens.colors.text.linkPressed}"}
+        }
+      },
+  
+      "chips": {
+        "selectors": [".chip", ".filter-pill"],
+        "background": "{tokens.colors.controls.chipBg}",
+        "text": "{tokens.colors.controls.chipText}",
+        "border": {"color": "#E5E5EA"},
+        "hover": {"background": "#EBEBEE"},
+        "active": {"background": "#E0E0E5"},
+        "focus": {"ring": "{meta.implementationNotes.elevation.focusRing}"}
+      },
+  
+      "inputs": {
+        "selectors": ["input[type='text']", ".search", ".select"],
+        "background": "{tokens.colors.controls.inputBg}",
+        "text": "{tokens.colors.text.primary}",
+        "placeholder": "{tokens.colors.controls.inputPlaceholder}",
+        "border": {"color": "{tokens.colors.controls.inputBorder}"},
+        "shadow": "inset 0 1px 2px rgba(0,0,0,0.05)",
+        "hover": {"border": {"color": "#C7C7CC"}},
+        "focus": {"border": {"color": "{tokens.colors.text.link}"}, "ring": "{meta.implementationNotes.elevation.focusRing}"}
+      },
+  
+      "navigation": {
+        "selectors": [".top-nav", ".breadcrumb"],
+        "background": "#FFFFFF",
+        "border": {"bottom": "#E5E5EA"},
+        "icon": {
+          "default": "#6E6E73",         
+          "active": "#1D1D1F",
+          "hover": "#1D1D1F"
+        },
+        "link": {
+          "color": "#1D1D1F",
+          "hover": "#1D1D1F",
+          "subdued": "#6E6E73"
+        }
+      },
+  
+      "paginationDots": {
+        "selectors": [".carousel .dot"],
+        "inactive": "{tokens.colors.decorative.dotInactive}",
+        "active": "{tokens.colors.decorative.dotActive}",
+        "hover": {"inactive": "#B9B9BE"},
+        "size": 6
+      },
+  
+      "priceAndRating": {
+        "price": {"color": "{tokens.colors.text.primary}", "weight": 600},
+        "oldPrice": {"color": "{tokens.colors.text.tertiary}", "decoration": "line-through"},
+        "stars": {"fill": "{tokens.colors.decorative.ratingStar}"}
+      },
+  
+      "footers": {
+        "selectors": ["footer", ".legal"],
+        "background": "#FFFFFF",
+        "text": {"primary": "#6E6E73", "link": "#0071E3"},
+        "hairlines": {"top": "#E5E5EA"}
+      }
+    },
+  
+    "contextAwareRules": [
+      {
+        "context": "Card containers",
+        "rule": "Use solid #FFFFFF background with 1px #E5E5EA border; icons inside the card use solid fills (#1D1D1F) without gradients; product images get drop shadows only."
+      },
+      {
+        "context": "Promo hero tiles",
+        "rule": "Use #000000 tile background. Only the decorative circular spheres use the specified linear gradients (blue/orange/yellow/pink). Do not gradient the text or the tile container."
+      },
+      {
+        "context": "Primary actions",
+        "rule": "Primary buttons use solid #0071E3 background. Secondary buttons use #F5F5F7 background with #D2D2D7 border. Ghost actions are text-only with link blue."
+      },
+      {
+        "context": "Navigation",
+        "rule": "Navigation icons and labels use #6E6E73 by default; active/hover states promote to #1D1D1F."
+      }
+    ],
+  
+    "visualEffectsPlacement": {
+      "shadows": [
+        {"applyTo": ".card, .product-card", "shadow": "{tokens.shadows.card}"},
+        {"applyTo": ".card:hover", "shadow": "{tokens.shadows.hover}"},
+        {"applyTo": ".card img, .product-photo", "shadow": "{tokens.shadows.image}"},
+        {"applyTo": ".hero-card", "shadow": "0 12px 40px rgba(0,0,0,0.35)"}
+      ],
+      "gradients": [
+        {"applyTo": ".hero-card .sphere.sphere--blue", "gradient": "{tokens.colors.gradients.sphereBlue}", "direction": "135deg"},
+        {"applyTo": ".hero-card .sphere.sphere--orange", "gradient": "{tokens.colors.gradients.sphereOrange}", "direction": "135deg"},
+        {"applyTo": ".hero-card .sphere.sphere--yellow", "gradient": "{tokens.colors.gradients.sphereYellow}", "direction": "135deg"},
+        {"applyTo": ".hero-card .sphere.sphere--pink", "gradient": "{tokens.colors.gradients.spherePink}", "direction": "135deg"},
+        {"applyTo": ".hero-card::after", "gradient": "{tokens.colors.gradients.tileEdgeGlow}"}
+      ],
+      "radius": [
+        {"applyTo": ".card, .product-card", "radius": 18},
+        {"applyTo": ".hero-card", "radius": 20},
+        {"applyTo": ".btn, .chip, input, .image-thumb", "radius": "{meta.implementationNotes.radii.*}"}
+      ],
+      "hoverAnimations": [
+        {"applyTo": ".card, .hero-card", "transform": "translateY(-2px)", "duration": "180ms", "easing": "cubic-bezier(.2,.8,.2,1)"},
+        {"applyTo": ".btn", "elevation": "raise 1 step", "duration": "120ms"}
+      ]
+    },
+  
+    "componentStates": {
+      "Card": {
+        "default": {"bg": "#FFFFFF", "border": "#E5E5EA", "shadow": "{tokens.shadows.card}"},
+        "hover": {"bg": "#FFFFFF", "border": "#D2D2D7", "shadow": "{tokens.shadows.hover}", "y": -2},
+        "active": {"shadow": "{tokens.shadows.card}", "y": 0},
+        "disabled": {"opacity": 0.5},
+        "focus": {"ring": "{meta.implementationNotes.elevation.focusRing}"}
+      },
+      "HeroTile": {
+        "default": {"bg": "#000000", "text": "#FFFFFF"},
+        "hover": {"shadow": "0 16px 48px rgba(0,0,0,0.40)", "y": -2},
+        "active": {"shadow": "0 12px 40px rgba(0,0,0,0.35)"},
+        "disabled": {"opacity": 0.6},
+        "focus": {"ring": "0 0 0 3px rgba(255,255,255,0.35) inset"}
+      },
+      "ButtonPrimary": {
+        "default": {"bg": "#0071E3", "text": "#FFFFFF", "icon": "#FFFFFF"},
+        "hover": {"bg": "#0077ED"},
+        "active": {"bg": "#0060DF"},
+        "disabled": {"bg": "rgba(0,113,227,0.35)", "text": "rgba(255,255,255,0.75)"},
+        "focus": {"ring": "{meta.implementationNotes.elevation.focusRing}"}
+      },
+      "ButtonSecondary": {
+        "default": {"bg": "#F5F5F7", "text": "#1D1D1F", "border": "#D2D2D7"},
+        "hover": {"bg": "#EBEBEE", "border": "#C7C7CC"},
+        "active": {"bg": "#E6E6EA"},
+        "disabled": {"opacity": 0.55},
+        "focus": {"ring": "{meta.implementationNotes.elevation.focusRing}"}
+      },
+      "ButtonGhost": {
+        "default": {"text": "#0071E3"},
+        "hover": {"text": "#0077ED"},
+        "active": {"text": "#0060DF"},
+        "disabled": {"text": "rgba(0,113,227,0.45)"},
+        "focus": {"ring": "0 0 0 2px rgba(0,113,227,0.25)"}
+      },
+      "Input": {
+        "default": {"bg": "#FFFFFF", "text": "#1D1D1F", "border": "#D2D2D7", "placeholder": "#86868B"},
+        "hover": {"border": "#C7C7CC"},
+        "active": {"border": "#C7C7CC"},
+        "disabled": {"bg": "#F5F5F7", "text": "#86868B"},
+        "focus": {"border": "#0071E3", "ring": "{meta.implementationNotes.elevation.focusRing}"}
+      },
+      "Chip": {
+        "default": {"bg": "#F5F5F7", "text": "#1D1D1F", "border": "#E5E5EA"},
+        "hover": {"bg": "#EBEBEE"},
+        "active": {"bg": "#E0E0E5"},
+        "disabled": {"opacity": 0.55},
+        "focus": {"ring": "{meta.implementationNotes.elevation.focusRing}"}
+      },
+      "CarouselDot": {
+        "default": {"fill": "#D2D2D7"},
+        "hover": {"fill": "#B9B9BE"},
+        "active": {"fill": "#1D1D1F"},
+        "disabled": {"opacity": 0.4},
+        "focus": {"ring": "0 0 0 2px rgba(0,0,0,0.2)"}
+      }
+    },
+  
+    "selectorsAndContexts": {
+      "cardRoots": [".card", ".product-card", ".band-card", ".accessory-card"],
+      "tileRoots": [".tile", ".promo-tile", ".hero-card"],
+      "primaryActions": [".btn-primary", "a.button.cta", "button[type='submit']"],
+      "secondaryActions": [".btn-secondary", "a.button.secondary"],
+      "ghostActions": [".btn-ghost", "a.link-cta"],
+      "listHeaders": [".section h2", ".row-title"],
+      "footers": ["footer.site-footer", ".legal"],
+      "nav": [".global-nav", ".breadcrumbs", "header .nav"]
+    },
+  
+    "hoverStateVariations": {
+      "borderColorDelta": {"from": "#E5E5EA", "to": "#D2D2D7"},
+      "shadowOpacityDelta": { "card": { "from": 0.08, "to": 0.12 } },
+      "backgroundLuminanceShift": { "secondaryButton": "-6%", "chip": "-4%" }
+    },
+  
+    "DO_NOT": [
+      "Do NOT apply tile/sphere gradients to card containers or icons inside cards.",
+      "Do NOT color body text with CTA blue; reserve #0071E3 for links and primary buttons.",
+      "Do NOT place strong drop shadows on text; shadows are for containers and product images only.",
+      "Do NOT use hairline #D2D2D7 as card background; it is for borders/dividers.",
+      "Do NOT round hero tiles with button radius; use 20px for tiles and 12px for buttons.",
+      "Do NOT invert text colors on white cards; inverse text (#FFFFFF) is ONLY for dark tiles."
+    ]
+  }
