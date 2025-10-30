@@ -91,7 +91,8 @@ const featuredActivities = [
 <MainLayout title="Club Deportivo Villa - Inicio" description="Más de 50 años promoviendo el deporte y la vida sana en nuestra comunidad. Descubre nuestras actividades, instalaciones y únete a nuestra familia deportiva.">
   <!-- Hero Section -->
   <section class="background-image-hero relative bg-gradient-to-br from-apple-link to-apple-link-hover text-apple-inverse flex items-center overflow-x-hidden">
-    <div class="max-width-content mx-auto px-4 w-full max-w-full">
+    <div class="absolute inset-0 bg-black/45"></div>
+    <div class="max-width-content mx-auto px-4 w-full max-w-full relative z-10">
       <div class="text-center max-w-4xl mx-auto">
         <h1 class="display mb-6 animate-fade-in-up" data-animation-delay="0.2s">
           Club Deportivo Villa
@@ -112,7 +113,36 @@ const featuredActivities = [
     </div>
   </section>
 
-  <section id="valores" class="py-16 md:py-20 bg-apple-gradient-light relative overflow-x-hidden h-auto min-h-screen md:h-screen text-white" style={`background-image: url('${gallo.src}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}>
+  <!-- Ad separator strip (same color as nav) -->
+  <div class="ad-strip bg-apple-primary-nav text-white overflow-hidden" aria-label="Publicidad">
+    <div class="ad-track">
+      <a href="#" class="ad-item">Patrocinador A</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Clínica Deportiva Salud+</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Tienda ProSport</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Cafetería El Faro</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Autoescuela Villa</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Gimnasio Ribera</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Patrocinador A</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Clínica Deportiva Salud+</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Tienda ProSport</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Cafetería El Faro</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Autoescuela Villa</a>
+      <span class="ad-sep">•</span>
+      <a href="#" class="ad-item">Gimnasio Ribera</a>
+    </div>
+  </div>
+
+  <section id="valores" class="py-16 md:py-20 bg-apple-gradient-light relative overflow-x-hidden h-auto min-h-screen text-white" style={`background-image: url('${gallo.src}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}>
     <div class="absolute inset-0 bg-black/45"></div>
     <div class="max-width-content mx-auto px-4 w-full max-w-full flex flex-col md:flex-row items-center gap-12 relative z-10">
       <div class="md:w-2/5 w-full">
@@ -141,7 +171,7 @@ const featuredActivities = [
         </div>
       </div>
     </div>
-    <div class="max-width-content mx-auto px-4 w-full max-w-full mt-8 relative z-10">
+    <div class="max-width-content mx-auto px-4 w-full max-w-full mt-12 md:mt-16 relative z-10">
       <ul class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8 animate-fade-in-up" data-animation-delay="0.3s">
         <li class="flex items-start gap-3">
           <span class="bg-white/20 text-white p-2 rounded-full">
@@ -409,6 +439,28 @@ const featuredActivities = [
       transform: none;
       transition: none;
     }
+  }
+
+  /* Ad separator strip styles */
+  .ad-strip { padding: 0.5rem 0; }
+  .ad-track {
+    display: inline-block;
+    white-space: nowrap;
+    will-change: transform;
+    animation: ad-scroll 22s linear infinite;
+  }
+  .ad-item { opacity: 0.95; padding: 0 1rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+  .ad-sep { opacity: 0.5; padding: 0 0.5rem; }
+  .ad-strip:hover .ad-track { animation-play-state: paused; }
+
+  @keyframes ad-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 768px) {
+    .ad-item { padding: 0 0.75rem; font-weight: 500; letter-spacing: 0.05em; }
+    .ad-strip { padding: 0.45rem 0; }
   }
 </style>
 
