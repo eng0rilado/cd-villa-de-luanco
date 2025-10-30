@@ -3,6 +3,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 import Card from '../components/ui/Card.astro';
 import HeroTile from '../components/ui/HeroTile.astro';
 import Button from '../components/ui/Button.astro';
+import gallo from '../img/gallo.png';
+import escudo from '../img/escudo.png';
 
 // Import API functions (in a real app, these would be async calls)
 import { getFeaturedEvents, getFeaturedNews, getActivities } from '../lib/api/api.js';
@@ -98,15 +100,96 @@ const featuredActivities = [
           Más de 50 años promoviendo el deporte y la vida sana en nuestra comunidad. 
           Únete a nuestra familia deportiva y descubre todo lo que tenemos para ofrecerte.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" data-animation-delay="0.6s">
-          <Button href="/club/colabora" variant="secondary" size="large">
+        <div class="flex flex-col lg:flex-row gap-4 justify-center animate-fade-in-up" data-animation-delay="0.6s">
+          <Button href="/club/colabora" variant="secondary" size="large" className="w-full lg:w-auto">
             Hazte Socio
           </Button>
-          <Button href="/actividades" variant="secondary" size="large">
+          <Button href="/actividades" variant="secondary" size="large" className="w-full lg:w-auto">
             Ver Actividades
           </Button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="valores" class="py-16 md:py-20 bg-apple-gradient-light relative overflow-x-hidden h-auto min-h-screen md:h-screen text-white" style={`background-image: url('${gallo.src}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}>
+    <div class="absolute inset-0 bg-black/45"></div>
+    <div class="max-width-content mx-auto px-4 w-full max-w-full flex flex-col md:flex-row items-center gap-12 relative z-10">
+      <div class="md:w-2/5 w-full">
+        <img
+          src={escudo.src}
+          alt="Escudo del Club Deportivo Villa"
+          sizes="(min-width: 1024px) 35vw, (min-width: 768px) 40vw, 80vw"
+          class="rounded-3xl shadow-xl object-contain w-full h-auto max-h-56 sm:max-h-72 md:max-h-[28rem] animate-fade-in-up"
+          loading="lazy"
+        >
+      </div>
+      <div class="md:w-3/5 w-full bg-black/30 md:bg-transparent rounded-2xl p-4 md:p-0">
+        <h2 class="h1 mb-6 leading-tight animate-fade-in-up text-white" data-animation-delay="0.1s">
+          Nuestro Club, Nuestros Valores
+        </h2>
+        <p class="text-lg mb-6 text-white/90 animate-fade-in-up" data-animation-delay="0.2s">
+          <strong>Club Deportivo Villa</strong> es mucho más que un club deportivo. Es una comunidad apasionada por el deporte, la inclusión y el crecimiento personal. Desde hace más de 50 años, fomentamos la práctica sana, el respeto y la superación, acogiendo a personas de todas las edades y niveles.
+        </p>
+        <div class="flex flex-col lg:flex-row gap-4 animate-fade-in-up" data-animation-delay="0.4s">
+          <Button href="/club/historia" variant="primary" size="large" className="w-full lg:w-auto">
+            Conoce nuestra historia
+          </Button>
+          <Button href="/club/valores" variant="secondary" size="large" className="w-full lg:w-auto">
+            Más sobre nuestros valores
+          </Button>
+        </div>
+      </div>
+    </div>
+    <div class="max-width-content mx-auto px-4 w-full max-w-full mt-8 relative z-10">
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8 animate-fade-in-up" data-animation-delay="0.3s">
+        <li class="flex items-start gap-3">
+          <span class="bg-white/20 text-white p-2 rounded-full">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 13l4 4L19 7" />
+            </svg>
+          </span>
+          <div>
+            <span class="font-semibold text-white">Trabajo en equipo</span>
+            <div class="text-sm text-white/80">Avanzamos unidos, apoyándonos dentro y fuera del campo.</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="bg-white/20 text-white p-2 rounded-full">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" /><path d="M8 12l2 2 4-4" />
+            </svg>
+          </span>
+          <div>
+            <span class="font-semibold text-white">Inclusión y respeto</span>
+            <div class="text-sm text-white/80">Celebramos la diversidad y apostamos por el compañerismo.</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="bg-white/20 text-white p-2 rounded-full">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M13 16h-1v-4h-1m1-4h.01" />
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+          </span>
+          <div>
+            <span class="font-semibold text-white">Formación integral</span>
+            <div class="text-sm text-white/80">Educamos en valores, promoviendo el desarrollo personal y deportivo.</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="bg-white/20 text-white p-2 rounded-full">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 00-3-3.87M9 17H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-5"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </span>
+          <div>
+            <span class="font-semibold text-white">Compromiso y pasión</span>
+            <div class="text-sm text-white/80">Ponemos el corazón en cada entrenamiento, partido y evento social.</div>
+          </div>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -124,7 +207,6 @@ const featuredActivities = [
         {featuredActivities.map((activity, index) => (
           <div class="animate-slide-in-up" data-animation-delay={`${0.3 + (index * 0.1)}s`}>
             <Card
-              key={activity.id}
               title={activity.title}
               description={activity.description}
               imageUrl={activity.imageUrl}
@@ -152,7 +234,7 @@ const featuredActivities = [
       </div>
       
       <div class="text-center mt-12 animate-fade-in-up" data-animation-delay="0.6s">
-        <Button href="/actividades" variant="primary" size="large">
+        <Button href="/actividades" variant="primary" size="large" className="w-full sm:w-auto">
           Ver Todas las Actividades
         </Button>
       </div>
@@ -203,7 +285,7 @@ const featuredActivities = [
       </div>
       
       <div class="text-center mt-12 animate-fade-in-up" data-animation-delay="0.7s">
-        <Button href="/eventos" variant="primary" size="large">
+        <Button href="/eventos" variant="primary" size="large" className="w-full sm:w-auto">
           Ver Todos los Eventos
         </Button>
       </div>
@@ -243,7 +325,7 @@ const featuredActivities = [
       </div>
       
       <div class="text-center mt-12 animate-fade-in-up" data-animation-delay="0.7s">
-        <Button href="/actualidad/noticias" variant="primary" size="large">
+        <Button href="/actualidad/noticias" variant="primary" size="large" className="w-full sm:w-auto">
           Ver Todas las Noticias
         </Button>
       </div>
@@ -258,11 +340,11 @@ const featuredActivities = [
         Únete a nuestra comunidad deportiva y descubre todo lo que el Club Deportivo Villa tiene para ofrecerte. 
         Tenemos actividades para todas las edades y niveles.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" data-animation-delay="0.3s">
-        <Button href="/club/colabora" variant="primary" size="large">
+      <div class="flex flex-col lg:flex-row gap-4 justify-center animate-fade-in-up" data-animation-delay="0.3s">
+        <Button href="/club/colabora" variant="primary" size="large" className="w-full lg:w-auto">
           Hazte Socio Ahora
         </Button>
-        <Button href="/club/contacto" variant="secondary" size="large">
+        <Button href="/club/contacto" variant="secondary" size="large" className="w-full lg:w-auto">
           Contacta con Nosotros
         </Button>
       </div>
@@ -341,7 +423,7 @@ const featuredActivities = [
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const element = entry.target;
+          const element = entry.target as HTMLElement;
           const delay = element.getAttribute('data-animation-delay');
           
           if (delay) {
